@@ -17,6 +17,7 @@
     "tailwindcss": "^3.2.6"
   },
   "dependencies": {
+    "@tailwindcss/line-clamp": "^0.4.4",
     "photoswipe": "^5.4.4",
     "typewriter-effect": "^2.21.0"
   }

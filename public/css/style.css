@@ -1220,6 +1220,13 @@ video {
   }
 }
 
+.custom-text-ellipsis{
+  display: -webkit-box;
+-webkit-line-clamp: 8;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
+}
 
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
