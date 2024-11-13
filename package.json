@@ -15,5 +15,9 @@
     "prettier": "^2.8.4",
     "prettier-plugin-tailwindcss": "^0.2.3",
     "tailwindcss": "^3.2.6"
+  },
+  "dependencies": {
+    "photoswipe": "^5.4.4",
+    "typewriter-effect": "^2.21.0"
   }
 }

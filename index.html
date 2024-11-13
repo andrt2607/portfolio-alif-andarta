@@ -9,11 +9,22 @@
     <link rel="stylesheet" href="public/css/style.css" />
     <!-- LINK FONT GOOGLES POPPINS -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-     <link rel="icon" href="public/img/technology/code_logo.jpg" type="image/jpg">
+    <link
+      rel="icon"
+      href="public/img/technology/code_logo.jpg"
+      type="image/jpg"
+    />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"
       rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/typewriter-effect@2.18.0/dist/core.min.js"></script>
+    <!-- <link rel="stylesheet" href="node_modules/photoswipe/dist/photoswipe.css" /> -->
+    <!-- <script src="node_modules/photoswipe/dist/photoswipe-lightbox.esm.min.js"></script> -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/photoswipe@5/dist/photoswipe.css"
     />
   </head>
 
@@ -107,30 +118,39 @@
     <section id="home" class="pt-36">
       <div class="container">
         <div class="flex flex-wrap">
-          <div class="mb-3 w-full self-center px-4 lg:w-1/2">
-            <h1 class="text-base font-semibold text-primary md:text-xl">
-              Hello World, I'm<span
+          <div class="w-full self-center px-4 lg:w-1/2">
+            <div id="my-fullname">
+              <!-- <h1 class="text-base font-semibold text-primary md:text-xl" >
+              Hello World, I'm
+              <span
                 class="mt-1 block text-4xl font-bold text-dark lg:text-5xl"
                 >Alif Andarta Al Falah</span
               >
-            </h1>
-            <h2 class="mb-5 text-lg font-medium text-secondary lg:text-2xl">
+            </h1> -->
+              <!-- <h2 class="mb-5 text-lg font-medium text-secondary lg:text-2xl">
               Web and
               <span class="text-dark">Android Development</span>
-            </h2>
+            </h2> -->
+            </div>
             <p
               class="mb-10 text-base font-medium leading-relaxed text-secondary"
             >
               "Turning creative ideas into reality through code full of
               innovation, creating solutions that are not only functional, but
               also attractive."
-              <!-- <span class="font-bold text-dark">God</span> has given you." -->
             </p>
-            <a
+            <!-- <a
               href="#contact"
               class="rounded-full bg-primary py-3 px-8 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg"
               >Contact Me</a
+            > -->
+            <!-- <button id="btn-contact-me">Contact Me</button> -->
+            <button
+              class="btn-shine rounded-full bg-primary"
+              onclick="window.location.href='#contact'"
             >
+              <span><a class="text-base text-white">Contact Me</a></span>
+            </button>
           </div>
           <div class="w-full self-center px-4 lg:right-0 lg:w-1/2">
             <div class="mt-10 md:mt-0 lg:mt-0">
@@ -162,7 +182,7 @@
             <p class="max-w-lg text-base font-medium text-secondary lg:text-lg">
               Graduated from Universitas Brawijaya on 2021. Now I'm focusing on
               back-end developer. Highly dedicated to becoming a pro hired on
-              NodeJS and Java Springboot.
+              NodeJS.
             </p>
           </div>
           <div class="w-full px-4 lg:w-1/2">
@@ -350,6 +370,7 @@
             <h3 class="mb-3 text-lg font-semibold text-primary md:text-xl">
               Portfolio
             </h3>
+
             <h2
               class="mb-4 text-3xl font-bold text-dark sm:text-4xl lg:text-5xl"
             >
@@ -364,15 +385,21 @@
         </div>
         <!-- portfolio -->
         <div
-          class="flex w-full flex-wrap justify-center px-4 xl:mx-auto xl:w-9/12"
+          class="gallery flex w-full flex-wrap justify-center px-4 xl:mx-auto xl:w-9/12"
         >
           <div class="mb-12 p-4 md:w-1/2">
             <div class="overflow-hidden rounded-md shadow-md">
-              <img
-                src="public/img/portfolio/ams_app.png"
-                alt="portfolio img"
-                width="w-full"
-              />
+              <a
+                href="public/img/portfolio/ams_app.png"
+                data-pswp-width="1400"
+                data-pswp-height="720"
+              >
+                <img
+                  src="public/img/portfolio/ams_app.png"
+                  alt="portfolio img"
+                  width="w-full"
+                />
+              </a>
             </div>
             <h3 class="mt-5 mb-5 text-xl font-semibold text-dark">
               Asset Management System
@@ -384,11 +411,17 @@
           </div>
           <div class="mb-12 p-4 md:w-1/2">
             <div class="overflow-hidden rounded-md shadow-md">
-              <img
-                src="public/img/portfolio/studydesa_wireframe.png"
-                alt="portfolio img"
-                width="w-full"
-              />
+              <a
+                href="public/img/portfolio/studydesa_wireframe.png"
+                data-pswp-width="1400"
+                data-pswp-height="720"
+              >
+                <img
+                  src="public/img/portfolio/studydesa_wireframe.png"
+                  alt="portfolio img"
+                  width="w-full"
+                />
+              </a>
             </div>
             <h3 class="mt-5 mb-5 text-xl font-semibold text-dark">
               StudyDesa Mobile App
@@ -400,11 +433,17 @@
           </div>
           <div class="mb-12 p-4 md:w-1/2">
             <div class="overflow-hidden rounded-md shadow-md">
-              <img
-                src="public/img/portfolio/img3.jpeg"
-                alt="portfolio img"
-                width="w-full"
-              />
+              <a
+                href="public/img/portfolio/img3.jpeg"
+                data-pswp-width="1400"
+                data-pswp-height="720"
+              >
+                <img
+                  src="public/img/portfolio/img3.jpeg"
+                  alt="portfolio img"
+                  width="w-full"
+                />
+              </a>
             </div>
             <h3 class="mt-5 mb-5 text-xl font-semibold text-dark">
               Citor Mobile App
@@ -416,11 +455,17 @@
           </div>
           <div class="mb-12 p-4 md:w-1/2">
             <div class="overflow-hidden rounded-md shadow-md">
-              <img
-                src="public/img/portfolio/kiddle_app22.png"
-                alt="portfolio img"
-                width="w-full"
-              />
+              <a
+                href="public/img/portfolio/kiddle_app22.png"
+                data-pswp-width="1400"
+                data-pswp-height="720"
+              >
+                <img
+                  src="public/img/portfolio/kiddle_app22.png"
+                  alt="portfolio img"
+                  width="w-full"
+                />
+              </a>
             </div>
             <h3 class="mt-5 mb-5 text-xl font-semibold text-dark">
               Kiddle Mobile App
@@ -458,7 +503,8 @@
         <div class="w-full px-4 lg:mx-auto lg:w-10/12 xl:mx-auto xl:w-8/12">
           <div class="flex flex-wrap items-center justify-center">
             <a
-              href="#"
+              href="https://www.oracle.com/id/java/technologies/downloads/"
+              target="_blank"
               class="mx-4 max-w-[120px] py-4 opacity-80 grayscale transition duration-500 hover:scale-110 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8"
             >
               <img
@@ -468,8 +514,9 @@
               />
             </a>
             <a
-              href="#"
+              href="https://www.javascript.com/"
               class="mx-4 max-w-[120px] py-4 opacity-80 grayscale transition duration-500 hover:scale-110 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8"
+              target="_blank"
             >
               <img
                 src="public/img/technology/js_logo.png"
@@ -478,8 +525,9 @@
               />
             </a>
             <a
-              href="#"
+              href="https://spring.io/projects/spring-boot"
               class="mx-4 max-w-[120px] py-4 opacity-80 grayscale transition duration-500 hover:scale-110 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8"
+              target="_blank"
             >
               <img
                 src="public/img/technology/springboot_logo.png"
@@ -488,8 +536,9 @@
               />
             </a>
             <a
-              href="#"
+              href="https://expressjs.com/en/starter/installing.html"
               class="mx-4 max-w-[120px] py-4 opacity-80 grayscale transition duration-500 hover:scale-110 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8"
+              target="_blank"
             >
               <img
                 src="public/img/technology/express_logo.jpg"
@@ -498,8 +547,9 @@
               />
             </a>
             <a
-              href="#"
+              href="https://react.dev/learn/installation"
               class="mx-4 max-w-[120px] py-4 opacity-80 grayscale transition duration-500 hover:scale-110 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8"
+              target="_blank"
             >
               <img
                 src="public/img/technology/react_logo.png"
@@ -508,8 +558,9 @@
               />
             </a>
             <a
-              href="#"
+              href="https://docs.flutter.dev/get-started/install"
               class="mx-4 max-w-[120px] py-4 opacity-80 grayscale transition duration-500 hover:scale-110 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8"
+              target="_blank"
             >
               <img
                 src="public/img/technology/flutter_logo.png"
@@ -518,8 +569,9 @@
               />
             </a>
             <a
-              href="#"
+              href="https://vuejs.org/guide/quick-start"
               class="mx-4 max-w-[120px] py-4 opacity-80 grayscale transition duration-500 hover:scale-110 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8"
+              target="_blank"
             >
               <img
                 src="public/img/technology/vuejs_logo2.png"
@@ -528,8 +580,9 @@
               />
             </a>
             <a
-              href="#"
+              href="https://go.dev/doc/tutorial/getting-started"
               class="mx-4 max-w-[120px] py-4 opacity-80 grayscale transition duration-500 hover:scale-110 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8"
+              target="_blank"
             >
               <img
                 src="public/img/technology/go_logo.png"
@@ -566,22 +619,20 @@
             <div class="w-full px-4 lg:w-1/2 xl:w-1/3">
               <div class="mb-10 overflow-hidden rounded-xl bg-white shadow-lg">
                 <img
-                  src="public/img/blog/blog1.jpeg"
-                  alt="Python Language"
+                  src="public/img/blog/devfest-bogor-2024-poetri-ballroom.jpeg"
+                  alt="Dev Fest Bogor 2024"
                   class="w-full"
+                  style="height: 300px; object-fit: cover"
                 />
-                <div class="py-8 px-6">
+                <div class="py-8 px-6" style="height: 350px;">
                   <a
-                    href="#"
+                    href="https://gdg.community.dev/events/details/google-gdg-bogor-presents-devfest-bogor-2024/"
                     class="mb-3 block text-xl font-semibold text-dark hover:text-primary"
                   >
-                    <h3 class="truncate">
-                      Alif Activity
-                    </h3>
+                    <h3 class="truncate">Dev Fest Bogor 2024</h3>
                   </a>
                   <p class="mb-6 text-base font-medium text-secondary">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Doloremque hic deleniti aliquid ipsa tempore.
+                    DevFest is a global developer conference hosted by Google Developer Groups (GDGs) worldwide. These community-organized events focus on learning, building, and connecting with fellow developers and tech practitioners. They offer a variety of activities, including technical talks, workshops, and networking opportunities. 
                   </p>
                   <a
                     href="#"
@@ -594,25 +645,23 @@
             <div class="w-full px-4 lg:w-1/2 xl:w-1/3">
               <div class="mb-10 overflow-hidden rounded-xl bg-white shadow-lg">
                 <img
-                  src="public/img/blog/blog2.jpeg"
-                  alt="Python Language"
+                  src="public/img/blog/google-extended-io-bogor-2024.jpeg"
+                  alt="Dev Fest Extended I/O"
                   class="w-full"
+                  style="height: 300px; object-fit: cover"
                 />
-                <div class="py-8 px-6">
+                <div class="py-8 px-6" style="height: 350px;">
                   <a
-                    href="#"
+                    href="https://gdg.community.dev/events/details/google-gdg-bogor-presents-google-io-extended-bogor-2024-ticket-soldout/"
                     class="mb-3 block text-xl font-semibold text-dark hover:text-primary"
                   >
-                    <h3 class="truncate">
-                      Alif Activity
-                    </h3>
+                    <h3 class="truncate">Google Extended I/O Bogor 2024</h3>
                   </a>
                   <p class="mb-6 text-base font-medium text-secondary">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Nulla magni et praesentium placeat rem.
+                    Google I/O Extended Bogor 2024 will be held on Saturday, 27 July 2024 bring Techtropic Summers Hottest Innovations and presenting more than 15 global expert speakers with 6 topics consisting of UI/UX, Android, Flutter, AI/Machine Learning, Cloud and Web. We pack our event with multi track session with various type of session include developer keynote, technical talk, workshop, product exhibition, job connect and so many challenge with great prize.
                   </p>
                   <a
-                    href="#"
+                    href="https://gdg.community.dev/events/details/google-gdg-bogor-presents-google-io-extended-bogor-2024-ticket-soldout/"
                     class="rounded-lg bg-primary py-2 px-4 text-base font-medium text-white hover:opacity-80"
                     >Read More</a
                   >
@@ -622,25 +671,23 @@
             <div class="w-full px-4 lg:w-1/2 xl:w-1/3">
               <div class="mb-10 overflow-hidden rounded-xl bg-white shadow-lg">
                 <img
-                  src="public/img/blog/blog3.jpeg"
-                  alt="Python Language"
+                  src="public/img/blog/iwd-bogor-2024.jpeg"
+                  alt="IWD Bogor 2024"
+                  style="height: 300px; object-fit: cover"
                   class="w-full"
                 />
-                <div class="py-8 px-6">
+                <div class="py-8 px-6" style="height: 350px;">
                   <a
-                    href="#"
+                    href="https://gdg.community.dev/events/details/google-gdg-bogor-presents-iwd-bogor-2024/"
                     class="mb-3 block text-xl font-semibold text-dark hover:text-primary"
                   >
-                    <h3 class="truncate">
-                      Alif Activity
-                    </h3>
+                    <h3 class="truncate">IWD Bogor 2024</h3>
                   </a>
                   <p class="mb-6 text-base font-medium text-secondary">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Incidunt quibusdam atque sit quod inventore.
+                    In this year WTM Bogor with GDG Bogor, presents IWD Bogor 2024 “Impact the Future”. This event will serve concept of career fair, product showcase, talkshow (self development material, community, career, founder) and parallel technical session (Machine Learning, Flutter, UI/UX and Web). Everyone can join this event, not specifically for women, secure your seat and see you at the venue!
                   </p>
                   <a
-                    href="#"
+                    href="https://gdg.community.dev/events/details/google-gdg-bogor-presents-iwd-bogor-2024/"
                     class="rounded-lg bg-primary py-2 px-4 text-base font-medium text-white hover:opacity-80"
                     >Read More</a
                   >
@@ -657,65 +704,46 @@
     <section id="contact" class="pt-36 pb-32">
       <div class="container">
         <div class="w-full px-4">
-          <div class="mx-auto mb-16 max-w-xl text-center">
+          <div class="mx-auto mb-8 max-w-xl text-center">
             <h3 class="mb-3 text-lg font-semibold text-primary md:text-xl">
               Contact
             </h3>
             <h2
               class="mb-4 text-3xl font-bold text-dark sm:text-4xl lg:text-5xl"
             >
-              Contact Us
+              Contact Me
             </h2>
             <p class="text-base font-medium text-secondary md:text-lg">
               Do not hesitate to contact me! I'm ready to hear questions,
-              feedback, or collaboration opportunities. Fill out the form below
+              feedback, or collaboration opportunities. You can click button below
               and we can start talking about interesting topic.
             </p>
           </div>
         </div>
 
-        <form>
-          <div class="w-full lg:mx-auto lg:w-2/3">
-            <div class="mb-8 w-full px-4">
-              <label for="name" class="text-base font-bold text-primary"
-                >Name</label
-              >
-              <input
-                type="text"
-                id="name"
-                class="w-full rounded-md bg-slate-200 p-3 text-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-              />
-            </div>
-            <div class="mb-8 w-full px-4">
-              <label for="email" class="text-base font-bold text-primary"
-                >Email</label
-              >
-              <input
-                type="email"
-                id="email"
-                class="w-full rounded-md bg-slate-200 p-3 text-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-              />
-            </div>
-            <div class="mb-8 w-full px-4">
-              <label for="message" class="text-base font-bold text-primary"
-                >Message</label
-              >
-              <textarea
-                type="message"
-                id="message"
-                class="h-32 w-full rounded-md bg-slate-200 p-3 text-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-              ></textarea>
-            </div>
-            <div class="w-full px-4">
-              <button
-                onclick="alert('Thank you for your message! You can chat me via discord or instagram.')"
-                class="w-full rounded-full bg-primary py-3 px-8 text-base font-bold text-white transition duration-500 hover:opacity-80 hover:shadow-lg"
-              >
-                Send
-              </button>
-            </div>
-          </div>
-        </form>
+        <!-- <button
+          onclick="alert('Thank you for your message! You can chat me via discord or instagram.')"
+          class="w-full rounded-full bg-primary py-3 px-8 text-base font-bold text-white transition duration-500 hover:opacity-80 hover:shadow-lg"
+        >
+          Send
+        </button> -->
+        <button class="btn-message bg-primary mx-auto" onclick="window.open('https://discordapp.com/users/365061150662197249', '_blank')">
+          <span class="text-message">Message me</span>
+          <span class="svg">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="50"
+              height="20"
+              viewBox="0 0 38 15"
+              fill="none"
+            >
+              <path
+                fill="white"
+                d="M10 7.519l-.939-.344h0l.939.344zm14.386-1.205l-.981-.192.981.192zm1.276 5.509l.537.843.148-.094.107-.139-.792-.611zm4.819-4.304l-.385-.923h0l.385.923zm7.227.707a1 1 0 0 0 0-1.414L31.343.448a1 1 0 0 0-1.414 0 1 1 0 0 0 0 1.414l5.657 5.657-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364zM1 7.519l.554.833.029-.019.094-.061.361-.23 1.277-.77c1.054-.609 2.397-1.32 3.629-1.787.617-.234 1.17-.392 1.623-.455.477-.066.707-.008.788.034.025.013.031.021.039.034a.56.56 0 0 1 .058.235c.029.327-.047.906-.39 1.842l1.878.689c.383-1.044.571-1.949.505-2.705-.072-.815-.45-1.493-1.16-1.865-.627-.329-1.358-.332-1.993-.244-.659.092-1.367.305-2.056.566-1.381.523-2.833 1.297-3.921 1.925l-1.341.808-.385.245-.104.068-.028.018c-.011.007-.011.007.543.84zm8.061-.344c-.198.54-.328 1.038-.36 1.484-.032.441.024.94.325 1.364.319.45.786.64 1.21.697.403.054.824-.001 1.21-.09.775-.179 1.694-.566 2.633-1.014l3.023-1.554c2.115-1.122 4.107-2.168 5.476-2.524.329-.086.573-.117.742-.115s.195.038.161.014c-.15-.105.085-.139-.076.685l1.963.384c.192-.98.152-2.083-.74-2.707-.405-.283-.868-.37-1.28-.376s-.849.069-1.274.179c-1.65.43-3.888 1.621-5.909 2.693l-2.948 1.517c-.92.439-1.673.743-2.221.87-.276.064-.429.065-.492.057-.043-.006.066.003.155.127.07.099.024.131.038-.063.014-.187.078-.49.243-.94l-1.878-.689zm14.343-1.053c-.361 1.844-.474 3.185-.413 4.161.059.95.294 1.72.811 2.215.567.544 1.242.546 1.664.459a2.34 2.34 0 0 0 .502-.167l.15-.076.049-.028.018-.011c.013-.008.013-.008-.524-.852l-.536-.844.019-.012c-.038.018-.064.027-.084.032-.037.008.053-.013.125.056.021.02-.151-.135-.198-.895-.046-.734.034-1.887.38-3.652l-1.963-.384zm2.257 5.701l.791.611.024-.031.08-.101.311-.377 1.093-1.213c.922-.954 2.005-1.894 2.904-2.27l-.771-1.846c-1.31.547-2.637 1.758-3.572 2.725l-1.184 1.314-.341.414-.093.117-.025.032c-.01.013-.01.013.781.624zm5.204-3.381c.989-.413 1.791-.42 2.697-.307.871.108 2.083.385 3.437.385v-2c-1.197 0-2.041-.226-3.19-.369-1.114-.139-2.297-.146-3.715.447l.771 1.846z"
+              ></path>
+            </svg>
+          </span>
+        </button>
       </div>
     </section>
     <!-- Contact Section End -->
@@ -727,7 +755,7 @@
           <div class="mb-12 w-full px-4 font-medium text-slate-300 md:w-1/3">
             <h2 class="mb-5 text-4xl font-bold text-white">Alif Andarta</h2>
             <h3 class="mb-2 text-2xl font-bold">Contact Us</h3>
-            <p>aliefazuka123@gmail.com</p>
+            <address><a href="mailto:aliefazuka123@gmail.com">aliefazuka123@gmail.com</a></address>
             <p>Jakarta</p>
           </div>
           <div class="mb-12 w-full px-4 md:w-1/3">
@@ -933,7 +961,7 @@
           <p class="text-center text-xs font-medium text-slate-500">
             Created By
             <a
-              href="https://instagram.com/"
+              href="https://www.instagram.com/alifandarta_/"
               target="_blank"
               class="font-bold text-primary"
               >Alif Andarta</a
@@ -950,7 +978,6 @@
       </div>
     </footer>
     <!-- Footer Section End -->
-
-    <script src="public/js/script.js"></script>
+    <script type="module" src="public/js/script.js"></script>
   </body>
 </html>
