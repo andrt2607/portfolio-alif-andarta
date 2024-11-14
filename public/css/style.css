@@ -1228,6 +1228,86 @@ overflow: hidden;
 text-overflow: ellipsis;
 }
 
+.btn-github {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+  gap: 15px;
+  background-color: #181717;
+  outline: 3px #181717 solid;
+  outline-offset: -3px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 400ms;
+}
+
+.btn-github .text {
+  color: white;
+  font-weight: 700;
+  font-size: 1em;
+  transition: 400ms;
+}
+
+.btn-github svg path {
+  transition: 400ms;
+}
+
+.btn-github:hover {
+  background-color: transparent;
+}
+
+.btn-github:hover .text {
+  color: #181717;
+}
+
+.btn-github:hover svg path {
+  fill: #181717;
+}
+
+.btn-figma {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+  gap: 15px;
+  background-color: #f32828;
+  outline: 3px #f32828 solid;
+  outline-offset: -3px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 400ms;
+}
+
+.btn-figma .text {
+  color: white;
+  font-weight: 700;
+  font-size: 1em;
+  transition: 400ms;
+}
+
+.btn-figma:hover .icon path {
+  fill: red; /* Change SVG color to red on hover */
+}
+
+.btn-figma svg path {
+  transition: 400ms;
+}
+
+.btn-figma:hover {
+  background-color: transparent;
+}
+
+.btn-figma:hover .text {
+  color: #f32828;
+}
+
+.btn-figma:hover svg path {
+  fill: #FFFF;
+}
+
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
