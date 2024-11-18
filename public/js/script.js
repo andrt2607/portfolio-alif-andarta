@@ -1,4 +1,5 @@
 import PhotoSwipeLightbox from "https://unpkg.com/photoswipe@5/dist/photoswipe-lightbox.esm.min.js";
+import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
 
 const lightbox = new PhotoSwipeLightbox({
   gallery: ".gallery",
@@ -68,3 +69,30 @@ document.addEventListener("DOMContentLoaded", function () {
 //     pswpModule: () => import('photoswipe/dist/photoswipe.esm.js')
 //   });
 //   lightbox.init();
+
+document.addEventListener('DOMContentLoaded', () => {
+  const swiper = new Swiper('.swiper', {
+    direction: 'horizontal',
+    centeredSlides: true,
+    grabCursor: true,
+    // effect: 'fade',
+    effect: 'cards',
+    keyboard: {
+      enabled: true,
+    },
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      // dynamicBullets: true,
+    },
+  });
+});
