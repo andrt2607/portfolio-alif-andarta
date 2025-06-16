@@ -142,7 +142,15 @@ const Activities: React.FC = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {activities.length === 0 ? (
+          <div className="text-center">
+            <div className="bg-blue-100 dark:bg-blue-900/30 border border-blue-300 dark:border-blue-700 rounded-lg p-6">
+              <p className="text-blue-800 dark:text-blue-300">
+                No activities data found. Please add your activities records.
+              </p>
+            </div>
+          </div>
+        ) : (<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {activities.map((activity, index) => (
             <motion.div
               key={activity.id}
@@ -179,7 +187,7 @@ const Activities: React.FC = () => {
               </div>
             </motion.div>
           ))}
-        </div>
+        </div>)}
 
         {/* Stats Section */}
         <motion.div

@@ -76,6 +76,31 @@ const Experience: React.FC = () => {
     );
   }
 
+  if (experiences.length === 0) {
+    return (
+      <section id="experience" className="py-20 bg-gray-50 dark:bg-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center"
+          >
+            <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              Professional Experience
+            </h2>
+            <div className="bg-blue-100 dark:bg-blue-900/30 border border-blue-300 dark:border-blue-700 rounded-lg p-6">
+              <p className="text-blue-800 dark:text-blue-300">
+                No experience data found. Please add your experience records.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="experience" className="py-20 bg-gray-50 dark:bg-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
