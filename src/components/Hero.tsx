@@ -1,14 +1,25 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, Download, Mail } from 'lucide-react';
+import { useProfile } from '../contexts/useProfile';
 
 const Hero: React.FC = () => {
+  const { profile, loading, error } = useProfile();
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  console.log('Profile data fullname : ', profile?.fullname);
+
+  if (loading) {
+    return <div className="text-center py-20">Loading...</div>;
+  }
+  if (error) {
+    return <div className="text-center py-20 text-red-500">Failed to load profile.</div>;
+  }
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800">
@@ -22,7 +33,7 @@ const Hero: React.FC = () => {
             <h1 className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white mb-6">
               Hi, I'm{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-600">
-                [Your Name]
+                {profile?.fullname || '[Your Name]'}
               </span>
             </h1>
           </motion.div>
@@ -33,8 +44,7 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto">
-              Innovative Software Engineer passionate about creating cutting-edge solutions 
-              through collaborative teamwork and modern technologies.
+              {profile?.description_hero || 'Innovative Software Engineer passionate about creating cutting-edge solutions through collaborative teamwork and modern technologies.'}
             </p>
           </motion.div>
 
@@ -63,7 +73,7 @@ const Hero: React.FC = () => {
               Get In Touch
             </motion.button>
 
-            <motion.a
+            {/* <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href="/resume.pdf"
@@ -72,7 +82,7 @@ const Hero: React.FC = () => {
             >
               <Download size={18} />
               Resume
-            </motion.a>
+            </motion.a> */}
           </motion.div>
 
           <motion.div
@@ -82,11 +92,11 @@ const Hero: React.FC = () => {
             className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-16"
           >
             <div className="text-center">
-              <h3 className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-2">5+</h3>
+              <h3 className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-2">3+</h3>
               <p className="text-slate-600 dark:text-slate-300">Years Experience</p>
             </div>
             <div className="text-center">
-              <h3 className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-2">50+</h3>
+              <h3 className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-2">5+</h3>
               <p className="text-slate-600 dark:text-slate-300">Projects Completed</p>
             </div>
             <div className="text-center">

@@ -3,8 +3,10 @@ import { motion } from 'framer-motion';
 import { Menu, X, Sun, Moon, Github, Linkedin, Mail } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useScrollspy } from '../hooks/useScrollspy';
+import { useProfile } from '../contexts/useProfile';
 
 const Header: React.FC = () => {
+  const { profile, loading, error } = useProfile();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const { theme, toggleTheme } = useTheme();
   
@@ -29,6 +31,17 @@ const Header: React.FC = () => {
       setIsMenuOpen(false);
     }
   };
+
+  if (loading) {
+    return <div className="text-center py-20">Loading...</div>;
+  }
+  if (error) {
+    return (
+      <div className="text-center py-20 text-red-500">
+        Failed to load profile.
+      </div>
+    );
+  }
 
   return (
     <motion.header
@@ -71,7 +84,7 @@ const Header: React.FC = () => {
               <motion.a
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                href="https://github.com"
+                href={`${profile?.github_account}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
@@ -81,7 +94,7 @@ const Header: React.FC = () => {
               <motion.a
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                href="https://linkedin.com"
+                href={`${profile?.linkedin_account}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"

@@ -59,3 +59,19 @@ export interface Contact {
   message: string;
   created_at: string;
 }
+
+export interface Profile {
+  id: string;
+  fullname: string;
+  description_hero: string;
+  email: string;
+  x_account: string;
+  github_account: string;
+  linkedin_account: string;
+  facebook_account: string;
+  instagram_account: string;
+  discord_account: string;
+  location_gmap: string;
+  created_at: string;
+  updated_at: string;
+}

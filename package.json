@@ -1,7 +1,22 @@
 {
   "name": "professional-portfolio",
+  "description": "A professional portfolio website built with React, Tailwind CSS, and Vite.",
+  "author": "Alif Andarta",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andrt2607/portfolio-alif-andarta"
+  },
+  "homepage": "https://alifandarta.com",
+  "keywords": [
+    "portfolio",
+    "react",
+    "tailwindcss",
+    "vite",
+    "web development"
+  ],
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

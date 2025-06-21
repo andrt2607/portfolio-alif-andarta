@@ -3,8 +3,10 @@ import { motion } from "framer-motion";
 import { ExternalLink, Github, Eye } from "lucide-react";
 import { portfolioService } from "../lib/supabase";
 import type { Project } from "../types";
+import { useProfile } from "../contexts/useProfile";
 
 const Portfolio: React.FC = () => {
+  const { profile, loadingProfile, error } = useProfile();
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<"all" | "featured">("featured");
@@ -157,6 +159,16 @@ const Portfolio: React.FC = () => {
           </div>
         </div>
       </section>
+    );
+  }
+  if (loadingProfile) {
+    return <div className="text-center py-20">Loading...</div>;
+  }
+  if (error) {
+    return (
+      <div className="text-center py-20 text-red-500">
+        Failed to load profile.
+      </div>
     );
   }
 
@@ -341,7 +353,7 @@ const Portfolio: React.FC = () => {
           <motion.a
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            href="https://github.com"
+            href={`${profile?.github_account}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-medium rounded-lg hover:bg-slate-800 dark:hover:bg-gray-100 transition-colors duration-200"

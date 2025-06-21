@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import type { Project, Experience, Education, Skill, Activity, Contact } from '../types';
+import type { Project, Experience, Education, Skill, Activity, Contact, Profile } from '../types';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
@@ -37,7 +37,7 @@ export const portfolioService = {
       .from('experience')
       .select('*')
       .order('start_date', { ascending: false });
-    
+    console.log('Experience data fetched:', data);
     if (error) throw error;
     return data || [];
   },
@@ -82,5 +82,16 @@ export const portfolioService = {
       .insert([contact]);
     
     if (error) throw error;
-  }
+  },
+
+   // Profile
+  async getProfile(): Promise<Profile[]> {
+    const { data, error } = await supabase
+      .from('profile')
+      .select('*')
+      // .order('created_at', { ascending: false });
+    console.log('Profile data fetched:', data);
+    if (error) throw error;
+    return data || [];
+  },
 };

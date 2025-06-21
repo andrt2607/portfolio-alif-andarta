@@ -1,8 +1,21 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { useForm } from 'react-hook-form';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, CheckCircle, AlertCircle } from 'lucide-react';
-import { portfolioService } from '../lib/supabase';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { useForm } from "react-hook-form";
+import {
+  Mail,
+  MapPin,
+  Send,
+  Github,
+  Linkedin,
+  Twitter,
+  CheckCircle,
+  AlertCircle,
+  Facebook,
+  Instagram,
+  MessageCircle,
+} from "lucide-react";
+import { portfolioService } from "../lib/supabase";
+import { useProfile } from "../contexts/useProfile";
 
 interface ContactForm {
   name: string;
@@ -12,27 +25,30 @@ interface ContactForm {
 }
 
 const Contact: React.FC = () => {
+  const { profile, loading, error } = useProfile();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors }
+    formState: { errors },
   } = useForm<ContactForm>();
 
   const onSubmit = async (data: ContactForm) => {
     setIsSubmitting(true);
-    setSubmitStatus('idle');
+    setSubmitStatus("idle");
 
     try {
       await portfolioService.submitContact(data);
-      setSubmitStatus('success');
+      setSubmitStatus("success");
       reset();
     } catch (error) {
-      console.error('Error submitting contact form:', error);
-      setSubmitStatus('error');
+      console.error("Error submitting contact form:", error);
+      setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
     }
@@ -41,44 +57,67 @@ const Contact: React.FC = () => {
   const contactInfo = [
     {
       icon: <Mail className="w-6 h-6" />,
-      label: 'Email',
-      value: 'hello@yourname.com',
-      href: 'mailto:hello@yourname.com'
+      label: "Email",
+      value: `${profile?.email}`,
+      href: `mailto:${profile?.email}`,
     },
     {
-      icon: <Phone className="w-6 h-6" />,
-      label: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567'
+      icon: <MessageCircle className="w-6 h-6" />,
+      label: "Discord",
+      value: `aliefazuka`,
+      href: `${profile?.discord_account}`,
     },
     {
       icon: <MapPin className="w-6 h-6" />,
-      label: 'Location',
-      value: 'San Francisco, CA',
-      href: 'https://maps.google.com'
-    }
+      label: "Location",
+      value: `Jakarta, Indonesia`,
+      href: `${profile?.location_gmap}`,
+    },
   ];
 
   const socialLinks = [
     {
       icon: <Github className="w-6 h-6" />,
-      label: 'GitHub',
-      href: 'https://github.com',
-      color: 'hover:text-gray-900 dark:hover:text-white'
+      label: "GitHub",
+      href: `${profile?.github_account}`,
+      color: "hover:text-gray-900 dark:hover:text-white",
     },
     {
       icon: <Linkedin className="w-6 h-6" />,
-      label: 'LinkedIn',
-      href: 'https://linkedin.com',
-      color: 'hover:text-blue-600'
+      label: "LinkedIn",
+      href: `${profile?.linkedin_account}`,
+      color: "hover:text-blue-600",
     },
     {
       icon: <Twitter className="w-6 h-6" />,
-      label: 'Twitter',
-      href: 'https://twitter.com',
-      color: 'hover:text-blue-400'
-    }
+      label: "X",
+      href: `${profile?.x_account}`,
+      color: "hover:text-blue-400",
+    },
+    {
+      icon: <Facebook className="w-6 h-6" />,
+      label: "Facebook",
+      href: `${profile?.facebook_account}`,
+      color: "hover:text-blue-400",
+    },
+    {
+      icon: <Instagram className="w-6 h-6" />,
+      label: "Instagram",
+      href: `${profile?.instagram_account}`,
+      color: "hover:text-blue-400",
+    },
   ];
+
+  if (loading) {
+    return <div className="text-center py-20">Loading...</div>;
+  }
+  if (error) {
+    return (
+      <div className="text-center py-20 text-red-500">
+        Failed to load profile.
+      </div>
+    );
+  }
 
   return (
     <section id="contact" className="py-20 bg-white dark:bg-slate-900">
@@ -94,8 +133,9 @@ const Contact: React.FC = () => {
             Let's Work Together
           </h2>
           <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-            Ready to collaborate on innovative projects? Whether you're a startup looking for technical leadership 
-            or an enterprise seeking scalable solutions, I'd love to hear from you.
+            Ready to collaborate on innovative projects? Whether you're a
+            startup looking for technical leadership or an enterprise seeking
+            scalable solutions, I'd love to hear from you.
           </p>
         </motion.div>
 
@@ -113,8 +153,10 @@ const Contact: React.FC = () => {
                 Get In Touch
               </h3>
               <p className="text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
-                I'm always excited to discuss new opportunities, innovative projects, or potential collaborations. 
-                Whether you have a specific project in mind or just want to connect, feel free to reach out.
+                I'm always excited to discuss new opportunities, innovative
+                projects, or potential collaborations. Whether you have a
+                specific project in mind or just want to connect, feel free to
+                reach out.
               </p>
             </div>
 
@@ -127,8 +169,12 @@ const Contact: React.FC = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   href={info.href}
-                  target={info.href.startsWith('http') ? '_blank' : undefined}
-                  rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  target={info.href.startsWith("http") ? "_blank" : undefined}
+                  rel={
+                    info.href.startsWith("http")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
                   className="flex items-center gap-4 p-4 rounded-lg bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200 group"
                 >
                   <div className="flex-shrink-0 w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-200">
@@ -189,11 +235,14 @@ const Contact: React.FC = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               {/* Name */}
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                >
                   Name *
                 </label>
                 <input
-                  {...register('name', { required: 'Name is required' })}
+                  {...register("name", { required: "Name is required" })}
                   type="text"
                   id="name"
                   className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
@@ -208,16 +257,19 @@ const Contact: React.FC = () => {
 
               {/* Email */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                >
                   Email *
                 </label>
                 <input
-                  {...register('email', {
-                    required: 'Email is required',
+                  {...register("email", {
+                    required: "Email is required",
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: 'Invalid email address'
-                    }
+                      message: "Invalid email address",
+                    },
                   })}
                   type="email"
                   id="email"
@@ -233,11 +285,14 @@ const Contact: React.FC = () => {
 
               {/* Subject */}
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                <label
+                  htmlFor="subject"
+                  className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                >
                   Subject *
                 </label>
                 <input
-                  {...register('subject', { required: 'Subject is required' })}
+                  {...register("subject", { required: "Subject is required" })}
                   type="text"
                   id="subject"
                   className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
@@ -252,11 +307,14 @@ const Contact: React.FC = () => {
 
               {/* Message */}
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                >
                   Message *
                 </label>
                 <textarea
-                  {...register('message', { required: 'Message is required' })}
+                  {...register("message", { required: "Message is required" })}
                   id="message"
                   rows={6}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200 resize-none"
@@ -291,25 +349,30 @@ const Contact: React.FC = () => {
               </motion.button>
 
               {/* Status Messages */}
-              {submitStatus === 'success' && (
+              {submitStatus === "success" && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="flex items-center gap-2 text-green-600 dark:text-green-400"
                 >
                   <CheckCircle size={18} />
-                  <span>Message sent successfully! I'll get back to you soon.</span>
+                  <span>
+                    Message sent successfully! I'll get back to you soon.
+                  </span>
                 </motion.div>
               )}
 
-              {submitStatus === 'error' && (
+              {submitStatus === "error" && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="flex items-center gap-2 text-red-600 dark:text-red-400"
                 >
                   <AlertCircle size={18} />
-                  <span>Failed to send message. Please try again or contact me directly.</span>
+                  <span>
+                    Failed to send message. Please try again or contact me
+                    directly.
+                  </span>
                 </motion.div>
               )}
             </form>

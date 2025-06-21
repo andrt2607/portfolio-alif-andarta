@@ -190,7 +190,7 @@ const Activities: React.FC = () => {
         </div>)}
 
         {/* Stats Section */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -222,7 +222,7 @@ const Activities: React.FC = () => {
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </motion.div> */}
 
         {/* Call to Action */}
         <motion.div

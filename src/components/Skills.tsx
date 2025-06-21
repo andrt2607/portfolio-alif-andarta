@@ -337,17 +337,13 @@ const Skills: React.FC = () => {
           <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-8">
             Core Competencies
           </h3>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-8">
             {[
               "Agile Development",
-              "Test-Driven Development",
               "CI/CD Pipelines",
               "Microservices Architecture",
               "RESTful APIs",
               "GraphQL",
-              "WebSockets",
-              "Performance Optimization",
-              "Security Best Practices",
               "Code Review",
               "Technical Leadership",
               "Mentoring",

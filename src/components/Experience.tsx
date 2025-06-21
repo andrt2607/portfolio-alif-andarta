@@ -11,6 +11,8 @@ const Experience: React.FC = () => {
   useEffect(() => {
     const fetchExperiences = async () => {
       try {
+        const profile = await portfolioService.getProfile();
+        console.log('Fetched profile data experience :', profile);
         const data = await portfolioService.getExperience();
         setExperiences(data);
       } catch (error) {

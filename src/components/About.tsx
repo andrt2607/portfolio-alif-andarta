@@ -1,29 +1,33 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Code, Users, Lightbulb, Target } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import { Code, Users, Lightbulb, Target } from "lucide-react";
 
 const About: React.FC = () => {
   const traits = [
     {
       icon: <Code className="w-8 h-8" />,
-      title: 'Technical Excellence',
-      description: 'Passionate about writing clean, efficient code and staying updated with the latest technologies and best practices.'
+      title: "Technical Excellence",
+      description:
+        "Passionate about writing clean, efficient code and staying updated with the latest technologies and best practices.",
     },
     {
       icon: <Users className="w-8 h-8" />,
-      title: 'Collaborative Spirit',
-      description: 'Thrive in team environments, believing that the best solutions come from diverse perspectives and shared knowledge.'
+      title: "Collaborative Spirit",
+      description:
+        "Thrive in team environments, believing that the best solutions come from diverse perspectives and shared knowledge.",
     },
     {
       icon: <Lightbulb className="w-8 h-8" />,
-      title: 'Innovation Mindset',
-      description: 'Always looking for creative solutions to complex problems and ways to improve existing processes and systems.'
+      title: "Innovation Mindset",
+      description:
+        "Always looking for creative solutions to complex problems and ways to improve existing processes and systems.",
     },
     {
       icon: <Target className="w-8 h-8" />,
-      title: 'Results Driven',
-      description: 'Focused on delivering high-quality solutions that meet business objectives and exceed client expectations.'
-    }
+      title: "Results Driven",
+      description:
+        "Focused on delivering high-quality solutions that meet business objectives and exceed client expectations.",
+    },
   ];
 
   return (
@@ -40,7 +44,8 @@ const About: React.FC = () => {
             About Me
           </h2>
           <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-            A passionate software engineer with a drive for innovation and a commitment to collaborative excellence.
+            A passionate software engineer with a drive for innovation and a
+            commitment to collaborative excellence.
           </p>
         </motion.div>
 
@@ -53,13 +58,14 @@ const About: React.FC = () => {
           >
             <div className="aspect-square rounded-2xl bg-gradient-to-br from-blue-500 to-teal-500 p-1">
               <div className="w-full h-full rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center">
-                    <Code className="w-16 h-16 text-white" />
+                <div className="text-center w-full h-full flex flex-col items-center justify-center">
+                  <div className="w-full h-full aspect-square mx-auto bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center overflow-hidden">
+                    <img
+                      src="/../assets/images/my_image.jpg"
+                      alt="Profile"
+                      className="w-full h-full object-cover scale-110"
+                    />
                   </div>
-                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
-                    Software Engineer
-                  </h3>
                 </div>
               </div>
             </div>
@@ -73,21 +79,29 @@ const About: React.FC = () => {
             className="space-y-6"
           >
             <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-              I'm a dedicated software engineer with over 5 years of experience building scalable 
-              applications and leading cross-functional teams. My passion lies in creating innovative 
-              solutions that solve real-world problems while fostering collaborative environments 
+              I'm a dedicated software engineer with over 3 years of experience
+              building scalable applications and leading cross-functional teams.
+              My passion lies in creating innovative solutions that solve
+              real-world problems while fostering collaborative environments
               where teams can thrive.
             </p>
-            
+
             <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-              Throughout my career, I've had the opportunity to work with startups and established 
-              corporations, helping them leverage technology to achieve their business goals. I believe 
-              in the power of teamwork and continuous learning to drive innovation and deliver 
-              exceptional results.
+              Throughout my career, I've had the opportunity to work with
+              startups and established corporations, helping them leverage
+              technology to achieve their business goals. I believe in the power
+              of teamwork and continuous learning to drive innovation and
+              deliver exceptional results.
             </p>
 
             <div className="flex flex-wrap gap-3">
-              {['Problem Solving', 'Leadership', 'Agile Methodologies', 'Code Review', 'Mentoring'].map((skill) => (
+              {[
+                "Problem Solving",
+                "Leadership",
+                "Agile Methodologies",
+                "Code Review",
+                "Mentoring",
+              ].map((skill) => (
                 <span
                   key={skill}
                   className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-sm font-medium"

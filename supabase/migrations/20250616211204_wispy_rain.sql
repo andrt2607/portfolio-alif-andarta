@@ -2,6 +2,7 @@
   # Portfolio Database Schema
 
   1. New Tables
+    - `profile` - User profile information
     - `projects` - Portfolio projects with details and metadata
     - `experience` - Professional work experience
     - `education` - Educational background and certifications
@@ -19,6 +20,37 @@
     - Foreign key relationships where applicable
     - Default values and constraints for data integrity
 */
+
+-- Profile table
+CREATE TABLE IF NOT EXISTS profile (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  name text NOT NULL,
+  title text NOT NULL,
+  bio text,
+  avatar_url text,
+  email text NOT NULL,
+  phone text,
+  location text,
+  website text,
+  created_at timestamptz DEFAULT now(),
+  updated_at timestamptz DEFAULT now()
+);
+
+ALTER TABLE profile ENABLE ROW LEVEL SECURITY;
+
+-- Public read access for profile
+CREATE POLICY "Profile is publicly readable"
+  ON profile
+  FOR SELECT
+  TO public
+  USING (true);
+
+-- Admin access for profile (authenticated users can manage)
+CREATE POLICY "Authenticated users can manage profile"
+  ON profile
+  FOR ALL
+  TO authenticated
+  USING (true);
 
 -- Projects table
 CREATE TABLE IF NOT EXISTS projects (
@@ -215,3 +247,6 @@ CREATE TRIGGER update_experience_updated_at BEFORE UPDATE ON experience FOR EACH
 CREATE TRIGGER update_education_updated_at BEFORE UPDATE ON education FOR EACH ROW EXECUTE PROCEDURE update_updated_at_column();
 CREATE TRIGGER update_skills_updated_at BEFORE UPDATE ON skills FOR EACH ROW EXECUTE PROCEDURE update_updated_at_column();
 CREATE TRIGGER update_activities_updated_at BEFORE UPDATE ON activities FOR EACH ROW EXECUTE PROCEDURE update_updated_at_column();
+
+-- To run this migration, use:
+-- supabase db push

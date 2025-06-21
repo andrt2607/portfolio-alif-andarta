@@ -1,13 +1,26 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Heart, Github, Linkedin, Mail, ArrowUp } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import { Heart, Github, Linkedin, Mail, ArrowUp } from "lucide-react";
+import { useProfile } from "../contexts/useProfile";
 
 const Footer: React.FC = () => {
+  const { profile, loading, error } = useProfile();
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const currentYear = new Date().getFullYear();
+
+  if (loading) {
+    return <div className="text-center py-20">Loading...</div>;
+  }
+  if (error) {
+    return (
+      <div className="text-center py-20 text-red-500">
+        Failed to load profile.
+      </div>
+    );
+  }
 
   return (
     <footer className="bg-slate-900 dark:bg-black text-white py-12 relative">
@@ -15,16 +28,19 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* About */}
           <div className="md:col-span-2">
-            <h3 className="text-2xl font-bold mb-4">Let's Build Something Amazing</h3>
+            <h3 className="text-2xl font-bold mb-4">
+              Let's Build Something Amazing
+            </h3>
             <p className="text-slate-300 mb-6 leading-relaxed">
-              Passionate software engineer dedicated to creating innovative solutions through 
-              collaborative teamwork and cutting-edge technologies. Always ready for the next challenge.
+              Passionate software engineer dedicated to creating innovative
+              solutions through collaborative teamwork and cutting-edge
+              technologies. Always ready for the next challenge.
             </p>
             <div className="flex gap-4">
               <motion.a
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                href="https://github.com"
+                href={`${profile?.github_account}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-slate-800 rounded-lg hover:bg-slate-700 transition-colors duration-200"
@@ -35,7 +51,7 @@ const Footer: React.FC = () => {
               <motion.a
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                href="https://linkedin.com"
+                href={`${profile?.linkedin_account}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-slate-800 rounded-lg hover:bg-slate-700 transition-colors duration-200"
@@ -46,7 +62,7 @@ const Footer: React.FC = () => {
               <motion.a
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                href="mailto:hello@yourname.com"
+                href={`mailto:${profile?.email}`}
                 className="p-2 bg-slate-800 rounded-lg hover:bg-slate-700 transition-colors duration-200"
                 aria-label="Email"
               >
@@ -60,20 +76,22 @@ const Footer: React.FC = () => {
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               {[
-                { label: 'About', href: '#about' },
-                { label: 'Experience', href: '#experience' },
-                { label: 'Skills', href: '#skills' },
-                { label: 'Portfolio', href: '#portfolio' },
-                { label: 'Contact', href: '#contact' }
+                { label: "About", href: "#about" },
+                { label: "Experience", href: "#experience" },
+                { label: "Skills", href: "#skills" },
+                { label: "Portfolio", href: "#portfolio" },
+                { label: "Contact", href: "#contact" },
               ].map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
                     onClick={(e) => {
                       e.preventDefault();
-                      const element = document.getElementById(link.href.substring(1));
+                      const element = document.getElementById(
+                        link.href.substring(1)
+                      );
                       if (element) {
-                        element.scrollIntoView({ behavior: 'smooth' });
+                        element.scrollIntoView({ behavior: "smooth" });
                       }
                     }}
                     className="text-slate-300 hover:text-white transition-colors duration-200"
@@ -91,25 +109,16 @@ const Footer: React.FC = () => {
             <div className="space-y-3 text-slate-300">
               <div>
                 <p className="text-sm">Email</p>
-                <a 
-                  href="mailto:hello@yourname.com"
+                <a
+                  href={`mailto:${profile?.email}`}
                   className="hover:text-white transition-colors duration-200"
                 >
-                  hello@yourname.com
-                </a>
-              </div>
-              <div>
-                <p className="text-sm">Phone</p>
-                <a 
-                  href="tel:+15551234567"
-                  className="hover:text-white transition-colors duration-200"
-                >
-                  +1 (555) 123-4567
+                  {profile?.email}
                 </a>
               </div>
               <div>
                 <p className="text-sm">Location</p>
-                <p>San Francisco, CA</p>
+                <p>Jakarta, Indonesia</p>
               </div>
             </div>
           </div>
@@ -118,14 +127,14 @@ const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center gap-2 text-slate-300 mb-4 md:mb-0">
-            <span>© {currentYear} Your Name. Made with</span>
+            <span>© {currentYear} {profile?.fullname}. Made with</span>
             <Heart size={16} className="text-red-500" />
             <span>and lots of ☕</span>
           </div>
-          
+
           <div className="flex items-center gap-4">
             <span className="text-slate-400 text-sm">
-              Built with React, TypeScript & Supabase
+              Built with React Vite & TypeScript
             </span>
             <motion.button
               whileHover={{ scale: 1.1 }}
