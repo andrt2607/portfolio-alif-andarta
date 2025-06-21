@@ -59,7 +59,7 @@ const About: React.FC = () => {
             <div className="aspect-square rounded-2xl bg-gradient-to-br from-blue-500 to-teal-500 p-1">
               <div className="w-full h-full rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center">
                 <div className="text-center w-full h-full flex flex-col items-center justify-center">
-                  <div className="w-full h-full aspect-square mx-auto bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center overflow-hidden">
+                  <div className="w-full h-full aspect-square mx-auto bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center overflow-hidden rounded-2xl">
                     <img
                       src="/assets/images/my_image.jpg"
                       alt="Profile"
