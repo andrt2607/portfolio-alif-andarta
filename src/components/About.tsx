@@ -61,7 +61,7 @@ const About: React.FC = () => {
                 <div className="text-center w-full h-full flex flex-col items-center justify-center">
                   <div className="w-full h-full aspect-square mx-auto bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center overflow-hidden">
                     <img
-                      src="/../assets/images/my_image.jpg"
+                      src="/assets/images/my_image.jpg"
                       alt="Profile"
                       className="w-full h-full object-cover scale-110"
                     />
