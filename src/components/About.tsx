@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Code, Users, Lightbulb, Target } from "lucide-react";
-import imgUrl from "/my_image.jpg"; // Adjust the path as necessary
+import imgUrl from "../assets/my_image.jpg"; // Adjust the path as necessary
 
 const About: React.FC = () => {
   const traits = [
