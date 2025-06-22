@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Code, Users, Lightbulb, Target } from "lucide-react";
-import imgUrl from "../assets/my_image.jpg"; // Adjust the path as necessary
 
 const About: React.FC = () => {
   const traits = [
@@ -62,7 +61,7 @@ const About: React.FC = () => {
                 <div className="text-center w-full h-full flex flex-col items-center justify-center">
                   <div className="w-full h-full aspect-square mx-auto bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center overflow-hidden rounded-2xl">
                     <img
-                      src={imgUrl}
+                      src='/assets/my_image.jpg'
                       alt="Profile"
                       className="w-full h-full object-cover scale-110"
                     />
