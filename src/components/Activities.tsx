@@ -1,8 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Calendar, Users, Trophy, Heart, Code, Presentation } from 'lucide-react';
-import { portfolioService } from '../lib/supabase';
-import type { Activity } from '../types';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Calendar,
+  Users,
+  Trophy,
+  Heart,
+  Code,
+  Presentation,
+} from "lucide-react";
+import { portfolioService } from "../lib/supabase";
+import type { Activity } from "../types";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
 
 const Activities: React.FC = () => {
   const [activities, setActivities] = useState<Activity[]>([]);
@@ -14,57 +26,63 @@ const Activities: React.FC = () => {
         const data = await portfolioService.getActivities();
         setActivities(data);
       } catch (error) {
-        console.error('Error fetching activities:', error);
+        console.error("Error fetching activities:", error);
         // Fallback data for demo
         setActivities([
           {
-            id: '1',
-            title: 'Global Hackathon Winner',
-            description: 'Led a team of 5 developers to win first place at TechGlobal Hackathon 2023 with an innovative AI-powered solution for sustainable agriculture. The project addressed food security challenges using machine learning and IoT sensors.',
-            date: '2023-10-15',
-            type: 'hackathon',
-            created_at: '2023-01-01'
+            id: "1",
+            title: "Global Hackathon Winner",
+            description:
+              "Led a team of 5 developers to win first place at TechGlobal Hackathon 2023 with an innovative AI-powered solution for sustainable agriculture. The project addressed food security challenges using machine learning and IoT sensors.",
+            date: "2023-10-15",
+            type: "hackathon",
+            created_at: "2023-01-01",
           },
           {
-            id: '2',
-            title: 'Tech Conference Speaker',
-            description: 'Delivered a keynote presentation on "Building Scalable Microservices with Modern JavaScript" at DevCon 2023. Shared insights from real-world implementations and best practices with 500+ attendees.',
-            date: '2023-08-22',
-            type: 'conference',
-            created_at: '2023-01-01'
+            id: "2",
+            title: "Tech Conference Speaker",
+            description:
+              'Delivered a keynote presentation on "Building Scalable Microservices with Modern JavaScript" at DevCon 2023. Shared insights from real-world implementations and best practices with 500+ attendees.',
+            date: "2023-08-22",
+            type: "conference",
+            created_at: "2023-01-01",
           },
           {
-            id: '3',
-            title: 'Open Source Contributor',
-            description: 'Active contributor to several open-source projects including React Router, Node.js core modules, and various developer tools. Maintained high code quality standards and mentored new contributors.',
-            date: '2023-06-01',
-            type: 'project',
-            created_at: '2023-01-01'
+            id: "3",
+            title: "Open Source Contributor",
+            description:
+              "Active contributor to several open-source projects including React Router, Node.js core modules, and various developer tools. Maintained high code quality standards and mentored new contributors.",
+            date: "2023-06-01",
+            type: "project",
+            created_at: "2023-01-01",
           },
           {
-            id: '4',
-            title: 'Code for Good Volunteer',
-            description: 'Volunteered 100+ hours developing a web application for a local non-profit organization focused on education accessibility. The platform helped connect 500+ students with learning resources.',
-            date: '2023-04-10',
-            type: 'volunteer',
-            created_at: '2023-01-01'
+            id: "4",
+            title: "Code for Good Volunteer",
+            description:
+              "Volunteered 100+ hours developing a web application for a local non-profit organization focused on education accessibility. The platform helped connect 500+ students with learning resources.",
+            date: "2023-04-10",
+            type: "volunteer",
+            created_at: "2023-01-01",
           },
           {
-            id: '5',
-            title: 'Tech Mentorship Program',
-            description: 'Mentored 12 junior developers through a structured 6-month program, focusing on technical skills, career development, and industry best practices. 90% of mentees received promotions or new opportunities.',
-            date: '2023-02-01',
-            type: 'other',
-            created_at: '2023-01-01'
+            id: "5",
+            title: "Tech Mentorship Program",
+            description:
+              "Mentored 12 junior developers through a structured 6-month program, focusing on technical skills, career development, and industry best practices. 90% of mentees received promotions or new opportunities.",
+            date: "2023-02-01",
+            type: "other",
+            created_at: "2023-01-01",
           },
           {
-            id: '6',
-            title: 'Startup Weekend Champion',
-            description: 'Co-founded and led the technical development of a fintech startup concept during Startup Weekend. The idea advanced to the regional finals and attracted interest from two angel investors.',
-            date: '2022-11-18',
-            type: 'hackathon',
-            created_at: '2023-01-01'
-          }
+            id: "6",
+            title: "Startup Weekend Champion",
+            description:
+              "Co-founded and led the technical development of a fintech startup concept during Startup Weekend. The idea advanced to the regional finals and attracted interest from two angel investors.",
+            date: "2022-11-18",
+            type: "hackathon",
+            created_at: "2023-01-01",
+          },
         ]);
       } finally {
         setLoading(false);
@@ -76,13 +94,13 @@ const Activities: React.FC = () => {
 
   const getActivityIcon = (type: string) => {
     switch (type) {
-      case 'hackathon':
+      case "hackathon":
         return <Trophy className="w-6 h-6" />;
-      case 'conference':
+      case "conference":
         return <Presentation className="w-6 h-6" />;
-      case 'volunteer':
+      case "volunteer":
         return <Heart className="w-6 h-6" />;
-      case 'project':
+      case "project":
         return <Code className="w-6 h-6" />;
       default:
         return <Users className="w-6 h-6" />;
@@ -91,24 +109,24 @@ const Activities: React.FC = () => {
 
   const getActivityColor = (type: string) => {
     switch (type) {
-      case 'hackathon':
-        return 'from-yellow-500 to-orange-500';
-      case 'conference':
-        return 'from-blue-500 to-indigo-500';
-      case 'volunteer':
-        return 'from-pink-500 to-rose-500';
-      case 'project':
-        return 'from-green-500 to-teal-500';
+      case "hackathon":
+        return "from-yellow-500 to-orange-500";
+      case "conference":
+        return "from-blue-500 to-indigo-500";
+      case "volunteer":
+        return "from-pink-500 to-rose-500";
+      case "project":
+        return "from-green-500 to-teal-500";
       default:
-        return 'from-purple-500 to-violet-500';
+        return "from-purple-500 to-violet-500";
     }
   };
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      month: 'long', 
-      year: 'numeric' 
+    return date.toLocaleDateString("en-US", {
+      month: "long",
+      year: "numeric",
     });
   };
 
@@ -138,9 +156,61 @@ const Activities: React.FC = () => {
             Activities & Achievements
           </h2>
           <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-            Demonstrating leadership, innovation, and collaborative spirit through community engagement and professional contributions.
+            Demonstrating leadership, innovation, and collaborative spirit
+            through community engagement and professional contributions.
           </p>
         </motion.div>
+
+        <Swiper
+          spaceBetween={24}
+          slidesPerView={1}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+            },
+            1024: {
+              slidesPerView: 3,
+            },
+          }}
+          className="mb-16"
+        >
+          <SwiperSlide>
+            <div className="w-full max-w-200 mx-auto aspect-square rounded-xl overflow-hidden shadow-lg">
+              <img
+                src="/assets/google-extended-io-bogor-2024.jpeg"
+                alt="Google Extended I/O Bogor 2024"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="w-full max-w-200 mx-auto aspect-square rounded-xl overflow-hidden shadow-lg">
+              <img
+                src="/assets/iwd-bogor-2024.jpeg"
+                alt="IWD Bogor 2024"
+                className="w-full h-full object-cover object-[25%_center] hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="w-full max-w-200 mx-auto aspect-square rounded-xl overflow-hidden shadow-lg">
+              <img
+                src="/assets/devfest-bogor-2024-poetri-ballroom.jpeg"
+                alt="DevFest Bogor 2024 at Poetri Ballroom"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="w-full max-w-200 mx-auto aspect-square rounded-xl overflow-hidden shadow-lg">
+              <img
+                src="/assets/google-io-bogor2025.jpg"
+                alt="Google I/O Bogor 2025"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+          </SwiperSlide>
+        </Swiper>
 
         {activities.length === 0 ? (
           <div className="text-center">
@@ -150,44 +220,50 @@ const Activities: React.FC = () => {
               </p>
             </div>
           </div>
-        ) : (<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {activities.map((activity, index) => (
-            <motion.div
-              key={activity.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
-            >
-              <div className="flex items-start gap-4">
-                <div className={`flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-r ${getActivityColor(activity.type)} flex items-center justify-center text-white`}>
-                  {getActivityIcon(activity.type)}
-                </div>
-
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                      {activity.title}
-                    </h3>
-                    <span className="flex-shrink-0 ml-2 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-sm font-medium rounded-full capitalize">
-                      {activity.type}
-                    </span>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {activities.map((activity, index) => (
+              <motion.div
+                key={activity.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="flex items-start gap-4">
+                  <div
+                    className={`flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-r ${getActivityColor(
+                      activity.type
+                    )} flex items-center justify-center text-white`}
+                  >
+                    {getActivityIcon(activity.type)}
                   </div>
 
-                  <div className="flex items-center gap-1 text-slate-600 dark:text-slate-300 text-sm mb-3">
-                    <Calendar size={14} />
-                    <span>{formatDate(activity.date)}</span>
-                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between mb-2">
+                      <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                        {activity.title}
+                      </h3>
+                      <span className="flex-shrink-0 ml-2 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-sm font-medium rounded-full capitalize">
+                        {activity.type}
+                      </span>
+                    </div>
 
-                  <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                    {activity.description}
-                  </p>
+                    <div className="flex items-center gap-1 text-slate-600 dark:text-slate-300 text-sm mb-3">
+                      <Calendar size={14} />
+                      <span>{formatDate(activity.date)}</span>
+                    </div>
+
+                    <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                      {activity.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>)}
+              </motion.div>
+            ))}
+          </div>
+        )}
 
         {/* Stats Section */}
         {/* <motion.div
@@ -236,15 +312,16 @@ const Activities: React.FC = () => {
             Let's Collaborate on Something Amazing
           </h3>
           <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-            I'm always excited to work on innovative projects, mentor aspiring developers, 
-            or contribute to meaningful causes. Let's build something impactful together.
+            I'm always excited to work on innovative projects, mentor aspiring
+            developers, or contribute to meaningful causes. Let's build
+            something impactful together.
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => {
-              const element = document.getElementById('contact');
-              if (element) element.scrollIntoView({ behavior: 'smooth' });
+              const element = document.getElementById("contact");
+              if (element) element.scrollIntoView({ behavior: "smooth" });
             }}
             className="px-8 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors duration-200"
           >

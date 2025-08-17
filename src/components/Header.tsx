@@ -1,33 +1,43 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Menu, X, Sun, Moon, Github, Linkedin, Mail } from 'lucide-react';
-import { useTheme } from '../contexts/ThemeContext';
-import { useScrollspy } from '../hooks/useScrollspy';
-import { useProfile } from '../contexts/useProfile';
+import React from "react";
+import { motion } from "framer-motion";
+import { Menu, X, Sun, Moon, Github, Linkedin, Mail } from "lucide-react";
+import { useTheme } from "../hooks/useTheme";
+import { useScrollspy } from "../hooks/useScrollspy";
+import { useProfile } from "../contexts/useProfile";
+import GradientText from "./core/GradientText";
 
 const Header: React.FC = () => {
   const { profile, loading, error } = useProfile();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const { theme, toggleTheme } = useTheme();
-  
-  const sectionIds = ['home', 'about', 'experience', 'education', 'skills', 'portfolio', 'activities', 'contact'];
+
+  const sectionIds = [
+    "home",
+    "about",
+    "experience",
+    "education",
+    "skills",
+    "portfolio",
+    "activities",
+    "contact",
+  ];
   const activeSection = useScrollspy(sectionIds);
 
   const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'education', label: 'Education' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'portfolio', label: 'Portfolio' },
-    { id: 'activities', label: 'Activities' },
-    { id: 'contact', label: 'Contact' },
+    { id: "home", label: "Home" },
+    { id: "about", label: "About" },
+    { id: "experience", label: "Experience" },
+    { id: "education", label: "Education" },
+    { id: "skills", label: "Skills" },
+    { id: "portfolio", label: "Portfolio" },
+    { id: "activities", label: "Activities" },
+    { id: "contact", label: "Contact" },
   ];
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
       setIsMenuOpen(false);
     }
   };
@@ -55,9 +65,16 @@ const Header: React.FC = () => {
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="font-bold text-xl text-slate-900 dark:text-white cursor-pointer"
-            onClick={() => scrollToSection('home')}
+            onClick={() => scrollToSection("home")}
           >
-            Portfolio
+            <GradientText
+              colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+              animationSpeed={3}
+              showBorder={false}
+              className="custom-class"
+            >
+              Portfolio
+            </GradientText>
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -68,8 +85,8 @@ const Header: React.FC = () => {
                 onClick={() => scrollToSection(item.id)}
                 className={`text-sm font-medium transition-colors duration-200 ${
                   activeSection === item.id
-                    ? 'text-blue-600 dark:text-blue-400'
-                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                    ? "text-blue-600 dark:text-blue-400"
+                    : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
                 }`}
               >
                 {item.label}
@@ -104,7 +121,7 @@ const Header: React.FC = () => {
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => scrollToSection('contact')}
+                onClick={() => scrollToSection("contact")}
                 className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
               >
                 <Mail size={20} />
@@ -118,7 +135,7 @@ const Header: React.FC = () => {
               onClick={toggleTheme}
               className="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
             >
-              {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+              {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
             </motion.button>
 
             {/* Mobile Menu Button */}
@@ -148,14 +165,14 @@ const Header: React.FC = () => {
                 onClick={() => scrollToSection(item.id)}
                 className={`block w-full text-left text-sm font-medium transition-colors duration-200 ${
                   activeSection === item.id
-                    ? 'text-blue-600 dark:text-blue-400'
-                    : 'text-slate-600 dark:text-slate-300'
+                    ? "text-blue-600 dark:text-blue-400"
+                    : "text-slate-600 dark:text-slate-300"
                 }`}
               >
                 {item.label}
               </button>
             ))}
-            
+
             {/* Mobile Social Links */}
             <div className="flex items-center space-x-4 pt-4 border-t border-gray-200 dark:border-slate-700">
               <a

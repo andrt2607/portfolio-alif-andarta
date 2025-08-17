@@ -337,28 +337,49 @@ const Skills: React.FC = () => {
           <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-8">
             Core Competencies
           </h3>
-          <div className="flex flex-wrap justify-center gap-8">
-            {[
-              "Agile Development",
-              "CI/CD Pipelines",
-              "Microservices Architecture",
-              "RESTful APIs",
-              "GraphQL",
-              "Code Review",
-              "Technical Leadership",
-              "Mentoring",
-            ].map((competency, index) => (
-              <motion.span
-                key={competency}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="px-4 py-2 bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-full font-medium hover:shadow-lg transition-shadow duration-200"
-              >
-                {competency}
-              </motion.span>
-            ))}
+          <div className="overflow-hidden">
+            <motion.div
+              animate={{
+                x: [0, -100 * 8] // Move by the width of all items
+              }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 10,
+                  ease: "linear",
+                },
+              }}
+              className="flex gap-8 whitespace-nowrap"
+              style={{ width: "200%" }}
+            >
+              {[
+                "Agile Development",
+                "CI/CD Pipelines",
+                "Microservices Architecture",
+                "RESTful APIs",
+                "GraphQL",
+                "Code Review",
+                "Technical Leadership",
+                "Mentoring",
+                // Duplicate for seamless loop
+                "Agile Development",
+                "CI/CD Pipelines",
+                "Microservices Architecture",
+                "RESTful APIs",
+                "GraphQL",
+                "Code Review",
+                "Technical Leadership",
+                "Mentoring",
+              ].map((competency, index) => (
+                <span
+                  key={`${competency}-${index}`}
+                  className="px-4 py-2 bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-full font-medium hover:shadow-lg transition-shadow duration-200 flex-shrink-0"
+                >
+                  {competency}
+                </span>
+              ))}
+            </motion.div>
           </div>
         </motion.div>
       </div>

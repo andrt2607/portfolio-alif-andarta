@@ -1,6 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Code, Users, Lightbulb, Target } from "lucide-react";
+import ScrambledText from "./core/ScrambledText";
+import PixelTransition from "./animation/PixelTransition";
 
 const About: React.FC = () => {
   const traits = [
@@ -56,20 +58,49 @@ const About: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="aspect-square rounded-2xl bg-gradient-to-br from-blue-500 to-teal-500 p-1">
-              <div className="w-full h-full rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center">
-                <div className="text-center w-full h-full flex flex-col items-center justify-center">
-                  <div className="w-full h-full aspect-square mx-auto bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center overflow-hidden rounded-2xl">
-                    <img
-                      src='/assets/my_image.jpg'
-                      alt="Profile"
-                      className="w-full h-full object-cover scale-110"
-                    />
-                    {/* <imgUrl/> */}
+            <PixelTransition
+              firstContent={
+                <div className="aspect-square rounded-2xl bg-gradient-to-br from-blue-500 to-teal-500 p-1">
+                  <div className="w-full h-full rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center">
+                    <div className="text-center w-full h-full flex flex-col items-center justify-center">
+                      <div className="w-full h-full aspect-square mx-auto bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center overflow-hidden rounded-2xl">
+                        <img
+                          src="/assets/my_image.jpg"
+                          alt="Profile"
+                          className="w-full h-full object-cover scale-110"
+                        />
+                        {/* <imgUrl/> */}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              }
+              secondContent={
+                <div
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    display: "grid",
+                    placeItems: "center",
+                    backgroundColor: "#111",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontWeight: 900,
+                      fontSize: "3rem",
+                      color: "#ffffff",
+                    }}
+                  >
+                    <span>You can call me Alif!</span>
+                  </p>
+                </div>
+              }
+              gridSize={12}
+              pixelColor="#ffffff"
+              animationStepDuration={0.4}
+              className="custom-pixel-card"
+            />
           </motion.div>
 
           <motion.div
@@ -79,21 +110,30 @@ const About: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-6"
           >
-            <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-              I'm a dedicated software engineer with over 3 years of experience
-              building scalable applications and leading cross-functional teams.
-              My passion lies in creating innovative solutions that solve
-              real-world problems while fostering collaborative environments
-              where teams can thrive.
-            </p>
+            {/* <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+             
+            </p> */}
+            <ScrambledText
+              children={
+                "I'm a dedicated software engineer with over 3 years of experience building scalable applications and leading cross-functional teams. My passion lies in creating innovative solutions that solve real-world problems while fostering collaborative environments where teams can thrive."
+              }
+              className="scrambled-text-demo text-slate-600 dark:text-slate-300 leading-relaxed"
+              radius={100}
+              duration={1.2}
+              speed={0.5}
+            />
 
-            <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-              Throughout my career, I've had the opportunity to work with
+            <ScrambledText
+              children={`Throughout my career, I've had the opportunity to work with
               startups and established corporations, helping them leverage
               technology to achieve their business goals. I believe in the power
               of teamwork and continuous learning to drive innovation and
-              deliver exceptional results.
-            </p>
+              deliver exceptional results.`}
+              className="scrambled-text-demo text-slate-600 dark:text-slate-300 leading-relaxed"
+              radius={100}
+              duration={1.2}
+              speed={0.5}
+            />
 
             <div className="flex flex-wrap gap-3">
               {[
