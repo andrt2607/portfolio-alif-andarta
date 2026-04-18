@@ -1,12 +1,11 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, Mail } from "lucide-react";
-import { useProfile } from "../contexts/useProfile";
+import React from "react";
 import Typewriter from "typewriter-effect";
 import SplitText from "./core/SplitText";
 
 const Hero: React.FC = () => {
-  const { profile, loading, error } = useProfile();
+  // const { profile, loading, error } = useProfile();
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -14,18 +13,18 @@ const Hero: React.FC = () => {
     }
   };
 
-  console.log("Profile data fullname : ", profile?.fullname);
+  // console.log("Profile data fullname : ", profile?.fullname);
 
-  if (loading) {
-    return <div className="text-center py-20">Loading...</div>;
-  }
-  if (error) {
-    return (
-      <div className="text-center py-20 text-red-500">
-        Failed to load profile.
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return <div className="text-center py-20">Loading...</div>;
+  // }
+  // if (error) {
+  //   return (
+  //     <div className="text-center py-20 text-red-500">
+  //       Failed to load profile.
+  //     </div>
+  //   );
+  // }
 
   return (
     <section
@@ -40,7 +39,8 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <SplitText
-              text={`Hi, I'm ${profile?.fullname || "[Your Name]"}`}
+              // text={`Hi, I'm ${profile?.fullname || "[Your Name]"}`}
+              text={`Hi, I'm Alif Andarta`}
               className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white mb-6"
               delay={100}
               duration={0.6}
@@ -71,8 +71,14 @@ const Hero: React.FC = () => {
                 typewriter
                   .typeString(
                     `<p class="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto">
-              ${profile?.description_hero}
+              Turning creative ideas into reality through code full of innovation, creating solutions that are not only functional, but also attractive.
             </p>`
+            //   onInit={(typewriter) => {
+            //     typewriter
+            //       .typeString(
+            //         `<p class="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto">
+            //   ${profile?.description_hero}
+            // </p>`
                   )
                   .pauseFor(700)
                   .start();
