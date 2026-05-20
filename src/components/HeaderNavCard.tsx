@@ -1,5 +1,4 @@
 import CardNav from "./core/CardNav";
-import logo from "../../public/assets/my_image.jpg";
 
 const HeaderNavCard: React.FC = () => {
   const items = [
@@ -58,23 +57,13 @@ const HeaderNavCard: React.FC = () => {
           href: "#contact",
           ariaLabel: "Contact",
         },
-        // {
-        //   label: "Twitter",
-        //   href: "https://twitter.com/company",
-        //   ariaLabel: "Twitter",
-        // },
-        // {
-        //   label: "LinkedIn",
-        //   href: "https://linkedin.com/company/company",
-        //   ariaLabel: "LinkedIn",
-        // },
       ],
     },
   ];
 
   return (
     <CardNav
-      logo={logo}
+      logo="/assets/my_image.jpg"
       logoAlt="Company Logo"
       items={items}
       baseColor="#000"

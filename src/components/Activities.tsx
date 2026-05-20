@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import {
   Calendar,
   Users,
@@ -8,6 +7,8 @@ import {
   Code,
   Presentation,
 } from "lucide-react";
+import Reveal from "./core/Reveal";
+import { scrollToSection } from "../lib/scrollToSection";
 import { portfolioService } from "../lib/supabase";
 import type { Activity } from "../types";
 // Import Swiper React components
@@ -145,13 +146,7 @@ const Activities: React.FC = () => {
   return (
     <section id="activities" className="py-20 bg-gray-50 dark:bg-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <Reveal className="text-center mb-16">
           <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
             Activities & Achievements
           </h2>
@@ -159,7 +154,7 @@ const Activities: React.FC = () => {
             Demonstrating leadership, innovation, and collaborative spirit
             through community engagement and professional contributions.
           </p>
-        </motion.div>
+        </Reveal>
 
         <Swiper
           spaceBetween={24}
@@ -179,6 +174,8 @@ const Activities: React.FC = () => {
               <img
                 src="/assets/google-extended-io-bogor-2024.jpeg"
                 alt="Google Extended I/O Bogor 2024"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               />
             </div>
@@ -188,6 +185,8 @@ const Activities: React.FC = () => {
               <img
                 src="/assets/iwd-bogor-2024.jpeg"
                 alt="IWD Bogor 2024"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover object-[25%_center] hover:scale-105 transition-transform duration-300"
               />
             </div>
@@ -197,6 +196,8 @@ const Activities: React.FC = () => {
               <img
                 src="/assets/devfest-bogor-2024-poetri-ballroom.jpeg"
                 alt="DevFest Bogor 2024 at Poetri Ballroom"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               />
             </div>
@@ -206,6 +207,8 @@ const Activities: React.FC = () => {
               <img
                 src="/assets/google-io-bogor2025.jpg"
                 alt="Google I/O Bogor 2025"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               />
             </div>
@@ -222,13 +225,9 @@ const Activities: React.FC = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {activities.map((activity, index) => (
-              <motion.div
+            {activities.map((activity) => (
+              <div
                 key={activity.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="flex items-start gap-4">
@@ -260,7 +259,7 @@ const Activities: React.FC = () => {
                     </p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         )}
@@ -301,13 +300,7 @@ const Activities: React.FC = () => {
         </motion.div> */}
 
         {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-16 text-center bg-gradient-to-r from-blue-500 to-teal-500 rounded-xl p-8 text-white"
-        >
+        <div className="mt-16 text-center bg-gradient-to-r from-blue-500 to-teal-500 rounded-xl p-8 text-white">
           <h3 className="text-2xl font-bold mb-4">
             Let's Collaborate on Something Amazing
           </h3>
@@ -316,18 +309,14 @@ const Activities: React.FC = () => {
             developers, or contribute to meaningful causes. Let's build
             something impactful together.
           </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => {
-              const element = document.getElementById("contact");
-              if (element) element.scrollIntoView({ behavior: "smooth" });
-            }}
+          <button
+            type="button"
+            onClick={() => scrollToSection("contact")}
             className="px-8 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors duration-200"
           >
             Get In Touch
-          </motion.button>
-        </motion.div>
+          </button>
+        </div>
       </div>
     </section>
   );

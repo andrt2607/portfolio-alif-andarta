@@ -39,7 +39,7 @@ const CardNav: React.FC<CardNavProps> = ({
 }) => {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const { isScrolled, isVisible } = useScroll();
+  const { isScrolled, isNavVisible, scrollToSection: navigateToSection } = useScroll();
   const navRef = useRef<HTMLDivElement | null>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
@@ -121,7 +121,7 @@ const CardNav: React.FC<CardNavProps> = ({
       if (!tlRef.current) return;
 
       if (isExpanded) {
-        const newHeight = calculateHeight()();
+        const newHeight = calculateHeight();
         gsap.set(navRef.current, { height: newHeight });
 
         tlRef.current.kill();
@@ -145,12 +145,12 @@ const CardNav: React.FC<CardNavProps> = ({
 
   // Auto-close menu when nav becomes invisible
   useLayoutEffect(() => {
-    if (!isVisible && isExpanded) {
+    if (!isNavVisible && isExpanded) {
       setIsHamburgerOpen(false);
       setIsExpanded(false);
       tlRef.current?.reverse();
     }
-  }, [isVisible, isExpanded]);
+  }, [isNavVisible, isExpanded]);
 
   const toggleMenu = () => {
     const tl = tlRef.current;
@@ -170,37 +170,31 @@ const CardNav: React.FC<CardNavProps> = ({
     if (el) cardsRef.current[i] = el;
   };
 
-  const handleSmoothScroll = (href: string) => {
+  const handleNavigate = (href: string) => {
     const targetId = href.startsWith("#") ? href.slice(1) : href;
-    const targetElement = document.getElementById(targetId);
+    navigateToSection(targetId);
 
-    if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-
-      // Close menu after navigation
-      if (isExpanded) {
-        toggleMenu();
-      }
+    if (isExpanded) {
+      toggleMenu();
     }
   };
 
   return (
     <div
-      className={`card-nav-container fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-[99] transition-all duration-300 ease-out ${
-        isVisible ? 'top-[1.2em] md:top-[2em] translate-y-0' : '-top-20 -translate-y-full'
+      className={`card-nav-container fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-[99] top-[1.2em] md:top-[2em] transition-[transform,opacity] duration-300 ease-out will-change-transform ${
+        isNavVisible
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 -translate-y-full pointer-events-none"
       } ${className}`}
     >
       <nav
         ref={navRef}
         className={`card-nav ${
           isExpanded ? "open" : ""
-        } block h-[60px] p-0 rounded-xl shadow-md relative overflow-hidden will-change-[height,transform,opacity] text-white transition-all duration-300 ease-${ease} ${
-          isScrolled 
-            ? 'bg-slate-900/80 dark:bg-slate-800/80 backdrop-blur-md shadow-lg border border-slate-700/20' 
-            : 'bg-slate-900 dark:bg-slate-800 shadow-md'
+        } block h-[60px] p-0 rounded-xl shadow-md relative overflow-hidden text-white transition-[background-color,box-shadow,border-color] duration-300 ${
+          isScrolled
+            ? "bg-slate-900/95 dark:bg-slate-800/95 shadow-lg border border-slate-700/20"
+            : "bg-slate-900 dark:bg-slate-800 shadow-md border border-transparent"
         }`}
         // style={{ backgroundColor: baseColor }}
       >
@@ -272,7 +266,7 @@ const CardNav: React.FC<CardNavProps> = ({
                     key={`${lnk.label}-${i}`}
                     type="button"
                     className="nav-card-link inline-flex items-center gap-[6px] no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[15px] md:text-[16px] bg-transparent border-none p-0 text-inherit"
-                    onClick={() => handleSmoothScroll(lnk.href)}
+                    onClick={() => handleNavigate(lnk.href)}
                     aria-label={lnk.ariaLabel}
                   >
                     {/* <GoArrowUpRight
