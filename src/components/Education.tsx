@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { GraduationCap, Calendar, Award } from "lucide-react";
+import Reveal from "./core/Reveal";
 import { portfolioService } from "../lib/supabase";
 import type { Education as EducationType } from "../types";
 
@@ -73,13 +73,7 @@ const Education: React.FC = () => {
   return (
     <section id="education" className="py-20 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <Reveal className="text-center mb-16">
           <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
             Education
           </h2>
@@ -87,7 +81,7 @@ const Education: React.FC = () => {
             Academic foundation that shaped my technical expertise and passion
             for innovation.
           </p>
-        </motion.div>
+        </Reveal>
 
         {education.length === 0 ? (
           <div className="text-center">
@@ -99,13 +93,9 @@ const Education: React.FC = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {education.map((edu, index) => (
-              <motion.div
+            {education.map((edu) => (
+              <div
                 key={edu.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
                 className="bg-gray-50 dark:bg-slate-800 rounded-xl p-8 hover:shadow-lg transition-shadow duration-300"
               >
                 <div className="flex items-start gap-4 mb-6">
@@ -146,7 +136,7 @@ const Education: React.FC = () => {
                     {edu.description}
                   </p>
                 )}
-              </motion.div>
+              </div>
             ))}
           </div>
         )}

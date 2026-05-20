@@ -25,7 +25,6 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({
     const fetchProfile = async () => {
       try {
         const data = await portfolioService.getProfile();
-        console.log("Fetched profile data:", data);
         setProfile(data[0]);
       } catch (err: any) {
         setError(err);

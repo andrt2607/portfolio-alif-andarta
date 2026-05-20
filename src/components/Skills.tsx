@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { Code, Database, Server, PenTool as Tool } from "lucide-react";
+import Reveal from "./core/Reveal";
 import { portfolioService } from "../lib/supabase";
 import type { Skill } from "../types";
 
@@ -234,13 +234,7 @@ const Skills: React.FC = () => {
   return (
     <section id="skills" className="py-20 bg-gray-50 dark:bg-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <Reveal className="text-center mb-16">
           <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
             Technical Skills
           </h2>
@@ -248,7 +242,7 @@ const Skills: React.FC = () => {
             A comprehensive toolkit of modern technologies and frameworks that
             enable innovative solution development.
           </p>
-        </motion.div>
+        </Reveal>
 
         {Object.keys(skillsByCategory).length === 0 ? (
           <div className="text-center">
@@ -261,16 +255,9 @@ const Skills: React.FC = () => {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {Object.entries(skillsByCategory).map(
-              ([category, categorySkills], categoryIndex) => (
-                <motion.div
+              ([category, categorySkills]) => (
+                <div
                   key={category}
-                  initial={{
-                    opacity: 0,
-                    x: categoryIndex % 2 === 0 ? -20 : 20,
-                  }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
                   className="bg-white dark:bg-slate-900 rounded-xl p-8 shadow-lg"
                 >
                   <div className="flex items-center gap-3 mb-8">
@@ -287,14 +274,8 @@ const Skills: React.FC = () => {
                   </div>
 
                   <div className="space-y-6">
-                    {categorySkills.map((skill, skillIndex) => (
-                      <motion.div
-                        key={skill.id}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: skillIndex * 0.1 }}
-                      >
+                    {categorySkills.map((skill) => (
+                      <div key={skill.id}>
                         <div className="flex justify-between items-center mb-2">
                           <span className="text-slate-900 dark:text-white font-medium">
                             {skill.name}
@@ -304,55 +285,29 @@ const Skills: React.FC = () => {
                           </span>
                         </div>
                         <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2">
-                          <motion.div
-                            initial={{ width: 0 }}
-                            whileInView={{ width: `${skill.proficiency}%` }}
-                            viewport={{ once: true }}
-                            transition={{
-                              duration: 1,
-                              delay: skillIndex * 0.1,
-                            }}
+                          <div
+                            style={{ width: `${skill.proficiency}%` }}
                             className={`h-2 rounded-full bg-gradient-to-r ${getCategoryColor(
                               category
                             )}`}
                           />
                         </div>
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
-                </motion.div>
+                </div>
               )
             )}
           </div>
         )}
 
         {/* Additional Skills Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-16 text-center"
-        >
+        <div className="mt-16 text-center">
           <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-8">
             Core Competencies
           </h3>
           <div className="overflow-hidden">
-            <motion.div
-              animate={{
-                x: [0, -100 * 8] // Move by the width of all items
-              }}
-              transition={{
-                x: {
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  duration: 10,
-                  ease: "linear",
-                },
-              }}
-              className="flex gap-8 whitespace-nowrap"
-              style={{ width: "200%" }}
-            >
+            <div className="flex gap-8 whitespace-nowrap w-max animate-marquee">
               {[
                 "Agile Development",
                 "CI/CD Pipelines",
@@ -362,7 +317,6 @@ const Skills: React.FC = () => {
                 "Code Review",
                 "Technical Leadership",
                 "Mentoring",
-                // Duplicate for seamless loop
                 "Agile Development",
                 "CI/CD Pipelines",
                 "Microservices Architecture",
@@ -379,9 +333,9 @@ const Skills: React.FC = () => {
                   {competency}
                 </span>
               ))}
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

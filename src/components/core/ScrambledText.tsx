@@ -15,6 +15,12 @@ export interface ScrambledTextProps {
   children: React.ReactNode;
 }
 
+const isTouchDevice = (): boolean =>
+  typeof window !== "undefined" &&
+  ("ontouchstart" in window ||
+    navigator.maxTouchPoints > 0 ||
+    window.matchMedia("(pointer: coarse)").matches);
+
 const ScrambledText: React.FC<ScrambledTextProps> = ({
   radius = 100,
   duration = 1.2,
@@ -27,9 +33,12 @@ const ScrambledText: React.FC<ScrambledTextProps> = ({
   const rootRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!rootRef.current) return;
+    if (!rootRef.current || isTouchDevice()) return;
 
-    const split = SplitText.create(rootRef.current.querySelector("p"), {
+    const paragraph = rootRef.current.querySelector("p");
+    if (!paragraph) return;
+
+    const split = SplitText.create(paragraph, {
       type: "chars",
       charsClass: "inline-block will-change-transform",
     });
@@ -39,15 +48,21 @@ const ScrambledText: React.FC<ScrambledTextProps> = ({
       gsap.set(c, { attr: { "data-content": c.innerHTML } });
     });
 
-    const handleMove = (e: PointerEvent) => {
-      split.chars.forEach((el) => {
+    const radiusSq = radius * radius;
+    let rafId: number | null = null;
+    let lastX = 0;
+    let lastY = 0;
+
+    const runScramble = (clientX: number, clientY: number) => {
+      for (const el of split.chars) {
         const c = el as HTMLElement;
         const { left, top, width, height } = c.getBoundingClientRect();
-        const dx = e.clientX - (left + width / 2);
-        const dy = e.clientY - (top + height / 2);
-        const dist = Math.hypot(dx, dy);
+        const dx = clientX - (left + width / 2);
+        const dy = clientY - (top + height / 2);
+        const distSq = dx * dx + dy * dy;
 
-        if (dist < radius) {
+        if (distSq < radiusSq) {
+          const dist = Math.sqrt(distSq);
           gsap.to(c, {
             overwrite: true,
             duration: duration * (1 - dist / radius),
@@ -59,14 +74,26 @@ const ScrambledText: React.FC<ScrambledTextProps> = ({
             ease: "none",
           });
         }
+      }
+    };
+
+    const handleMove = (e: PointerEvent) => {
+      lastX = e.clientX;
+      lastY = e.clientY;
+      if (rafId !== null) return;
+
+      rafId = requestAnimationFrame(() => {
+        runScramble(lastX, lastY);
+        rafId = null;
       });
     };
 
     const el = rootRef.current;
-    el.addEventListener("pointermove", handleMove);
+    el.addEventListener("pointermove", handleMove, { passive: true });
 
     return () => {
       el.removeEventListener("pointermove", handleMove);
+      if (rafId !== null) cancelAnimationFrame(rafId);
       split.revert();
     };
   }, [radius, duration, speed, scrambleChars]);

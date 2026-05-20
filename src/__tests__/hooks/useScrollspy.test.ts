@@ -40,7 +40,11 @@ describe('useScrollspy', () => {
 
   it('should add scroll event listener on mount', () => {
     renderHook(() => useScrollspy(['section1', 'section2']));
-    expect(window.addEventListener).toHaveBeenCalledWith('scroll', expect.any(Function));
+    expect(window.addEventListener).toHaveBeenCalledWith(
+      'scroll',
+      expect.any(Function),
+      { passive: true }
+    );
   });
 
   it('should remove scroll event listener on unmount', () => {

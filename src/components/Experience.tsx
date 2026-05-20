@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { Calendar, MapPin, ExternalLink } from "lucide-react";
+import Reveal from "./core/Reveal";
 import { portfolioService } from "../lib/supabase";
 import type { Experience as ExperienceType } from "../types";
 
@@ -11,8 +11,6 @@ const Experience: React.FC = () => {
   useEffect(() => {
     const fetchExperiences = async () => {
       try {
-        const profile = await portfolioService.getProfile();
-        console.log("Fetched profile data experience :", profile);
         const data = await portfolioService.getExperience();
         setExperiences(data);
       } catch (error) {
@@ -88,13 +86,7 @@ const Experience: React.FC = () => {
     return (
       <section id="experience" className="py-20 bg-gray-50 dark:bg-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
+          <Reveal className="text-center">
             <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
               Professional Experience
             </h2>
@@ -103,7 +95,7 @@ const Experience: React.FC = () => {
                 No experience data found. Please add your experience records.
               </p>
             </div>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
     );
@@ -112,13 +104,7 @@ const Experience: React.FC = () => {
   return (
     <section id="experience" className="py-20 bg-gray-50 dark:bg-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <Reveal className="text-center mb-16">
           <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
             Professional Experience
           </h2>
@@ -126,7 +112,7 @@ const Experience: React.FC = () => {
             A journey of continuous learning, innovation, and collaborative
             success across diverse technical environments.
           </p>
-        </motion.div>
+        </Reveal>
 
         <div className="relative">
           {/* Timeline line */}
@@ -134,12 +120,8 @@ const Experience: React.FC = () => {
 
           <div className="space-y-12">
             {experiences.map((exp, index) => (
-              <motion.div
+              <div
                 key={exp.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
                 className={`relative flex items-center ${
                   index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 } flex-col md:flex-row`}
@@ -163,12 +145,9 @@ const Experience: React.FC = () => {
                           {exp.company}
                         </h4>
                       </div>
-                      <motion.div
-                        whileHover={{ scale: 1.1 }}
-                        className="text-blue-600 dark:text-blue-400"
-                      >
+                      <div className="text-blue-600 dark:text-blue-400">
                         <ExternalLink size={20} />
-                      </motion.div>
+                      </div>
                     </div>
 
                     <div className="flex items-center gap-4 text-sm text-slate-600 dark:text-slate-300 mb-4">
@@ -201,7 +180,7 @@ const Experience: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

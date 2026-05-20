@@ -3,36 +3,16 @@ import { ChevronDown, Mail } from "lucide-react";
 import React from "react";
 import Typewriter from "typewriter-effect";
 import SplitText from "./core/SplitText";
+import { scrollToSection } from "../lib/scrollToSection";
 
 const Hero: React.FC = () => {
-  // const { profile, loading, error } = useProfile();
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  // console.log("Profile data fullname : ", profile?.fullname);
-
-  // if (loading) {
-  //   return <div className="text-center py-20">Loading...</div>;
-  // }
-  // if (error) {
-  //   return (
-  //     <div className="text-center py-20 text-red-500">
-  //       Failed to load profile.
-  //     </div>
-  //   );
-  // }
-
   return (
     <section
       id="home"
       className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 w-full mb-16">
-        <div className="text-center overflow-x-auto">
+        <div className="text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -63,7 +43,7 @@ const Hero: React.FC = () => {
           >
             <Typewriter
               options={{
-                loop: true,
+                loop: false,
                 delay: 40,
                 cursor: "",
               }}
@@ -165,12 +145,9 @@ const Hero: React.FC = () => {
         onClick={() => scrollToSection("about")}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors duration-200"
       >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
+        <div className="animate-bounce-soft">
           <ChevronDown size={24} />
-        </motion.div>
+        </div>
       </motion.button>
     </section>
   );

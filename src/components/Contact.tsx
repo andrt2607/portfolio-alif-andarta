@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
+import Reveal from "./core/Reveal";
 import {
   Mail,
   MapPin,
@@ -122,13 +122,7 @@ const Contact: React.FC = () => {
   return (
     <section id="contact" className="py-20 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <Reveal className="text-center mb-16">
           <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
             Let's Work Together
           </h2>
@@ -137,17 +131,11 @@ const Contact: React.FC = () => {
             startup looking for technical leadership or an enterprise seeking
             scalable solutions, I'd love to hear from you.
           </p>
-        </motion.div>
+        </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Information */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
-          >
+          <div className="space-y-8">
             <div>
               <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
                 Get In Touch
@@ -161,13 +149,9 @@ const Contact: React.FC = () => {
             </div>
 
             <div className="space-y-6">
-              {contactInfo.map((info, index) => (
-                <motion.a
+              {contactInfo.map((info) => (
+                <a
                   key={info.label}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
                   href={info.href}
                   target={info.href.startsWith("http") ? "_blank" : undefined}
                   rel={
@@ -188,7 +172,7 @@ const Contact: React.FC = () => {
                       {info.value}
                     </div>
                   </div>
-                </motion.a>
+                </a>
               ))}
             </div>
 
@@ -198,36 +182,24 @@ const Contact: React.FC = () => {
                 Follow Me
               </h4>
               <div className="flex gap-4">
-                {socialLinks.map((social, index) => (
-                  <motion.a
+                {socialLinks.map((social) => (
+                  <a
                     key={social.label}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`p-3 bg-gray-100 dark:bg-slate-800 rounded-xl text-slate-600 dark:text-slate-400 ${social.color} transition-colors duration-200`}
+                    className={`p-3 bg-gray-100 dark:bg-slate-800 rounded-xl text-slate-600 dark:text-slate-400 ${social.color} transition-colors duration-200 hover:scale-110`}
                     aria-label={social.label}
                   >
                     {social.icon}
-                  </motion.a>
+                  </a>
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-gray-50 dark:bg-slate-800 rounded-xl p-8"
-          >
+          <div className="bg-gray-50 dark:bg-slate-800 rounded-xl p-8">
             <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
               Send a Message
             </h3>
@@ -328,9 +300,7 @@ const Contact: React.FC = () => {
               </div>
 
               {/* Submit Button */}
-              <motion.button
-                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+              <button
                 type="submit"
                 disabled={isSubmitting}
                 className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
@@ -346,37 +316,29 @@ const Contact: React.FC = () => {
                     Send Message
                   </>
                 )}
-              </motion.button>
+              </button>
 
               {/* Status Messages */}
               {submitStatus === "success" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center gap-2 text-green-600 dark:text-green-400"
-                >
+                <div className="flex items-center gap-2 text-green-600 dark:text-green-400">
                   <CheckCircle size={18} />
                   <span>
                     Message sent successfully! I'll get back to you soon.
                   </span>
-                </motion.div>
+                </div>
               )}
 
               {submitStatus === "error" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center gap-2 text-red-600 dark:text-red-400"
-                >
+                <div className="flex items-center gap-2 text-red-600 dark:text-red-400">
                   <AlertCircle size={18} />
                   <span>
                     Failed to send message. Please try again or contact me
                     directly.
                   </span>
-                </motion.div>
+                </div>
               )}
             </form>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

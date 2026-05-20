@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { ExternalLink, Github, Eye } from "lucide-react";
+import Reveal from "./core/Reveal";
 import { portfolioService } from "../lib/supabase";
 import type { Project } from "../types";
 import { useProfile } from "../contexts/useProfile";
 
 const Portfolio: React.FC = () => {
-  const { profile, loadingProfile, error } = useProfile();
+  const { profile, loading: profileLoading, error } = useProfile();
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<"all" | "featured">("featured");
@@ -161,7 +161,7 @@ const Portfolio: React.FC = () => {
       </section>
     );
   }
-  if (loadingProfile) {
+  if (profileLoading) {
     return <div className="text-center py-20">Loading...</div>;
   }
   if (error) {
@@ -175,13 +175,7 @@ const Portfolio: React.FC = () => {
   return (
     <section id="portfolio" className="py-20 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <Reveal className="text-center mb-16">
           <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
             Featured Projects
           </h2>
@@ -213,7 +207,7 @@ const Portfolio: React.FC = () => {
               All Projects
             </button>
           </div>
-        </motion.div>
+        </Reveal>
 
         {projects.length === 0 ? (
           <div className="text-center">
@@ -226,14 +220,10 @@ const Portfolio: React.FC = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <motion.div
+            {projects.map((project) => (
+              <div
                 key={project.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group bg-gray-50 dark:bg-slate-800 rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                className="group bg-gray-50 dark:bg-slate-800 rounded-xl overflow-hidden hover:shadow-2xl transition-[transform,box-shadow] duration-300 hover:-translate-y-2"
               >
                 {/* Project Image */}
                 <div className="relative h-48 overflow-hidden">
@@ -243,33 +233,31 @@ const Portfolio: React.FC = () => {
                       "https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=800"
                     }
                     alt={project.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <div className="flex gap-4">
                       {project.live_url && (
-                        <motion.a
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.95 }}
+                        <a
                           href={project.live_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors duration-200"
+                          className="p-3 bg-white/30 rounded-full text-white hover:bg-white/40 transition-colors duration-200"
                         >
                           <Eye size={20} />
-                        </motion.a>
+                        </a>
                       )}
                       {project.github_url && (
-                        <motion.a
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.95 }}
+                        <a
                           href={project.github_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors duration-200"
+                          className="p-3 bg-white/30 rounded-full text-white hover:bg-white/40 transition-colors duration-200"
                         >
                           <Github size={20} />
-                        </motion.a>
+                        </a>
                       )}
                     </div>
                   </div>
@@ -333,26 +321,18 @@ const Portfolio: React.FC = () => {
                     )}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         )}
 
         {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center mt-16"
-        >
+        <div className="text-center mt-16">
           <p className="text-slate-600 dark:text-slate-300 mb-6">
             Interested in seeing more of my work or discussing a potential
             collaboration?
           </p>
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <a
             href={`${profile?.github_account}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -360,8 +340,8 @@ const Portfolio: React.FC = () => {
           >
             <Github size={18} />
             View All Projects on GitHub
-          </motion.a>
-        </motion.div>
+          </a>
+        </div>
       </div>
     </section>
   );

@@ -1,97 +1,65 @@
-import { createClient } from '@supabase/supabase-js';
 import type { Project, Experience, Education, Skill, Activity, Contact, Profile } from '../types';
+import {
+  localProfile,
+  localProjects,
+  localExperience,
+  localEducation,
+  localSkills,
+  localActivities,
+} from './portfolioData';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+const localContacts: Contact[] = [];
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+const sortByCreatedAtDesc = <T extends { created_at: string }>(items: T[]): T[] =>
+  [...items].sort(
+    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  );
 
-// Database service functions
+const sortByStartDateDesc = <T extends { start_date: string }>(items: T[]): T[] =>
+  [...items].sort(
+    (a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
+  );
+
+const sortByDateDesc = <T extends { date: string }>(items: T[]): T[] =>
+  [...items].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+const sortByProficiencyDesc = (items: Skill[]): Skill[] =>
+  [...items].sort((a, b) => b.proficiency - a.proficiency);
+
 export const portfolioService = {
-  // Projects
   async getProjects(): Promise<Project[]> {
-    const { data, error } = await supabase
-      .from('projects')
-      .select('*')
-      .order('created_at', { ascending: false });
-    
-    if (error) throw error;
-    return data || [];
+    return sortByCreatedAtDesc(localProjects);
   },
 
   async getFeaturedProjects(): Promise<Project[]> {
-    const { data, error } = await supabase
-      .from('projects')
-      .select('*')
-      .eq('featured', true)
-      .order('created_at', { ascending: false })
-      .limit(6);
-    
-    if (error) throw error;
-    return data || [];
+    return sortByCreatedAtDesc(localProjects.filter((p) => p.featured)).slice(0, 6);
   },
 
-  // Experience
   async getExperience(): Promise<Experience[]> {
-    const { data, error } = await supabase
-      .from('experience')
-      .select('*')
-      .order('start_date', { ascending: false });
-    console.log('Experience data fetched:', data);
-    if (error) throw error;
-    return data || [];
+    return sortByStartDateDesc(localExperience);
   },
 
-  // Education
   async getEducation(): Promise<Education[]> {
-    const { data, error } = await supabase
-      .from('education')
-      .select('*')
-      .order('start_date', { ascending: false });
-    
-    if (error) throw error;
-    return data || [];
+    return sortByStartDateDesc(localEducation);
   },
 
-  // Skills
   async getSkills(): Promise<Skill[]> {
-    const { data, error } = await supabase
-      .from('skills')
-      .select('*')
-      .order('proficiency', { ascending: false });
-    
-    if (error) throw error;
-    return data || [];
+    return sortByProficiencyDesc(localSkills);
   },
 
-  // Activities
   async getActivities(): Promise<Activity[]> {
-    const { data, error } = await supabase
-      .from('activities')
-      .select('*')
-      .order('date', { ascending: false });
-    
-    if (error) throw error;
-    return data || [];
+    return sortByDateDesc(localActivities);
   },
 
-  // Contact
   async submitContact(contact: Omit<Contact, 'id' | 'created_at'>): Promise<void> {
-    const { error } = await supabase
-      .from('contacts')
-      .insert([contact]);
-    
-    if (error) throw error;
+    localContacts.push({
+      ...contact,
+      id: String(localContacts.length + 1),
+      created_at: new Date().toISOString(),
+    });
   },
 
-   // Profile
   async getProfile(): Promise<Profile[]> {
-    const { data, error } = await supabase
-      .from('profile')
-      .select('*')
-      // .order('created_at', { ascending: false });
-    console.log('Profile data fetched:', data);
-    if (error) throw error;
-    return data || [];
+    return [...localProfile];
   },
 };

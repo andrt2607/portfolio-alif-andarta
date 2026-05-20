@@ -28,7 +28,6 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.39.3",
     "framer-motion": "^10.16.16",
     "gsap": "^3.13.0",
     "lucide-react": "^0.344.0",
